@@ -2,13 +2,13 @@
 This is currently in the alpha phase and will be coming soon...
 
 # Build Instructions
-Create a build directory and go cd into it:
+Create a build directory and cd into it:
 ```
 mkdir build
 cd build
 ```
 
-Run generation command:
+Run generation command (the flag is for Neovim to have proper linking):
 ```
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 ```
