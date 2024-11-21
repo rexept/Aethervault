@@ -15,7 +15,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 }
 
 // useless?
-QVBoxLayout *ContactPage::getLayout() { return m_layout; }
+QVBoxLayout *ContactPage::getLayout() { return this->m_layout; }
 
 void ContactPage::setupInputFields() {
   m_layout->addWidget(m_website);
