@@ -18,7 +18,8 @@ private:
   QLineEdit *m_website;
   QLineEdit *m_email;
   QLineEdit *m_password;
-  QLineEdit *m_name;
+  QLineEdit *m_firstName;
+  QLineEdit *m_lastName;
 
   void setupInputFields();
 };

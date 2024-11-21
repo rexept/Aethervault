@@ -11,7 +11,8 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_website = new QLineEdit(this);
   m_email = new QLineEdit(this);
   m_password = new QLineEdit(this);
-  m_name = new QLineEdit(this);
+  m_firstName = new QLineEdit(this);
+  m_lastName = new QLineEdit(this);
 
   setupInputFields();
 }
@@ -25,15 +26,18 @@ void ContactPage::setupInputFields() {
   m_layout->addWidget(m_website);
   m_layout->addWidget(m_email);
   m_layout->addWidget(m_password);
-  m_layout->addWidget(m_name);
+  m_layout->addWidget(m_firstName);
+  m_layout->addWidget(m_lastName);
 
-  const QString website_placeholder = "Website";
-  const QString email_placeholder = "Email";
-  const QString password_placeholder = "Password";
-  const QString name_placeholder = "Name";
+  const QString websitePlaceholder = "Website";
+  const QString emailPlaceholder = "Email";
+  const QString passwordPlaceholder = "Password";
+  const QString firstNamePlaceholder = "First Name";
+  const QString lasttNamePlaceholder = "Last Name";
 
-  m_website->setPlaceholderText(website_placeholder);
-  m_email->setPlaceholderText(email_placeholder);
-  m_password->setPlaceholderText(password_placeholder);
-  m_name->setPlaceholderText(name_placeholder);
+  m_website->setPlaceholderText(websitePlaceholder);
+  m_email->setPlaceholderText(emailPlaceholder);
+  m_password->setPlaceholderText(passwordPlaceholder);
+  m_firstName->setPlaceholderText(firstNamePlaceholder);
+  m_lastName->setPlaceholderText(lasttNamePlaceholder);
 }
