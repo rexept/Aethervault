@@ -1,4 +1,4 @@
-![test](assets/Aethervault-logot.svg)
+<img src="assets/Aethervault-logot.svg" alt="Aethervault" width="100%" />
 ---
 This is currently in the alpha phase and will be coming soon...
 
