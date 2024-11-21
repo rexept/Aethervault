@@ -1,6 +1,7 @@
 <img src="assets/Aethervault-logot.svg" alt="Aethervault" width="100%" />
 
 ---
+# Aethervault is an open-source contact management system designed to provide a robust and secure way to store and manage contact information. Built using C++, this software focuses on offering high performance, flexibility, and customizability for developers and users alike.
 
 This is currently in the alpha phase and will be coming soon...
 
