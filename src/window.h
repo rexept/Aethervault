@@ -5,13 +5,14 @@
 
 class QLineEdit;
 class QLabel;
+class ContactPage;
+
 class Window : public QWidget {
 public:
   explicit Window(QWidget *parent = 0);
 
 private:
-  QLineEdit *m_lineEdit;
-  QLabel *m_label;
+  ContactPage *contactpage;
 };
 
 #endif // WINDOW_H
