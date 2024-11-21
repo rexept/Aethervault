@@ -1,5 +1,7 @@
 #include "window.h"
 #include "contactPage.h"
+#include "header.h"
+
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -9,21 +11,10 @@
 
 Window::Window(QWidget *parent) : QWidget(parent) {
   contactPage = new ContactPage(this);
+  header = new Header(this);
   masterLayout = new QVBoxLayout(this);
-  logo = new QSvgWidget(this);
 
-  logoPath = "../assets/Aethervault-logot.svg";
-  logo->load(logoPath);
-  logo->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-
-  logo->setFixedWidth(272);
-  logo->setFixedHeight(45);
-
-  // Header - for logo
-  QHBoxLayout *header = new QHBoxLayout();
-  header->addWidget(logo, 2, Qt::AlignLeft);
-
-  masterLayout->addLayout(header);
+  masterLayout->addLayout(header->getLayout());
 
   masterLayout->addWidget(contactPage);
 

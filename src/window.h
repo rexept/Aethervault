@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class ContactPage;
+class Header;
 class QVBoxLayout;
 class QHBoxLayout;
 class QSvgWidget;
@@ -15,9 +16,9 @@ public:
 
 private:
   ContactPage *contactPage;
+  Header *header;
   QSvgWidget *logo;
   QVBoxLayout *masterLayout;
-  QHBoxLayout *header;
   QString logoPath;
 };
 
