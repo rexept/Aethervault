@@ -1,3 +1,7 @@
+file(GLOB SOURCES
+    src/*.cpp
+)
+
 cmake_minimum_required(VERSION 3.5)
 
 # Set the project name and version
@@ -7,7 +11,7 @@ project(Aethervault VERSION 1.0 LANGUAGES CXX)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Svg)
 
 # Add the executable target
-add_executable(Aethervault src/main.cpp src/window.cpp src/contactPage.cpp)
+add_executable(Aethervault ${SOURCES})
 
 # Link against the Qt5 libraries
 target_link_libraries(Aethervault PRIVATE Qt5::Core Qt5::Widgets Qt5::Svg)
