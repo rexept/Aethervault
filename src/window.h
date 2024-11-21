@@ -19,7 +19,7 @@ private:
   ContactPage *contactPage;
   QSvgWidget *logo;
   QVBoxLayout *masterLayout;
-  QHBoxLayout *topLayout;
+  QHBoxLayout *header;
   QString logoPath;
 };
 

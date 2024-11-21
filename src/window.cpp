@@ -19,11 +19,11 @@ Window::Window(QWidget *parent) : QWidget(parent) {
   logo->setFixedWidth(272);
   logo->setFixedHeight(45);
 
-  // Top layout - header - for logo
-  QHBoxLayout *topLayout = new QHBoxLayout();
-  topLayout->addWidget(logo, 2, Qt::AlignLeft);
+  // Header - for logo
+  QHBoxLayout *header = new QHBoxLayout();
+  header->addWidget(logo, 2, Qt::AlignLeft);
 
-  masterLayout->addLayout(topLayout);
+  masterLayout->addLayout(header);
 
   masterLayout->addWidget(contactPage);
 
