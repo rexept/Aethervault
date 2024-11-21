@@ -1,4 +1,5 @@
-# Aethervault
+![Aethervault](assets/Aethervault.png)
+---
 This is currently in the alpha phase and will be coming soon...
 
 # Build Instructions
