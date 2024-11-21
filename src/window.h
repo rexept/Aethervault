@@ -6,13 +6,21 @@
 class QLineEdit;
 class QLabel;
 class ContactPage;
+class QVBoxLayout;
+class QHBoxLayout;
+class QSvgWidget;
+class QString;
 
 class Window : public QWidget {
 public:
   explicit Window(QWidget *parent = 0);
 
 private:
-  ContactPage *contactpage;
+  ContactPage *contactPage;
+  QSvgWidget *logo;
+  QVBoxLayout *masterLayout;
+  QHBoxLayout *topLayout;
+  QString logoPath;
 };
 
 #endif // WINDOW_H

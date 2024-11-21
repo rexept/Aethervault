@@ -1,13 +1,31 @@
 #include "window.h"
 #include "contactPage.h"
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QString>
 #include <QVBoxLayout>
+#include <QtSvg/QSvgWidget>
 
 Window::Window(QWidget *parent) : QWidget(parent) {
-  contactpage = new ContactPage(this);
+  contactPage = new ContactPage(this);
+  masterLayout = new QVBoxLayout(this);
+  logo = new QSvgWidget(this);
 
-  QVBoxLayout *layout = contactpage->get_layout();
+  logoPath = "../assets/Aethervault-logot.svg";
+  logo->load(logoPath);
+  logo->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-  setLayout(layout);
+  logo->setFixedWidth(272);
+  logo->setFixedHeight(45);
+
+  // Top layout - header - for logo
+  QHBoxLayout *topLayout = new QHBoxLayout();
+  topLayout->addWidget(logo, 2, Qt::AlignLeft);
+
+  masterLayout->addLayout(topLayout);
+
+  masterLayout->addWidget(contactPage);
+
+  setLayout(masterLayout);
 }
