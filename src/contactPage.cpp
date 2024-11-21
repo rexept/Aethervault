@@ -19,6 +19,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 // useless?
 QVBoxLayout *ContactPage::getLayout() { return this->m_layout; }
 
+/// Adds widgets to layout and sets their respective placeholders
 void ContactPage::setupInputFields() {
   // Add widgets to layout
   m_layout->addWidget(m_website);

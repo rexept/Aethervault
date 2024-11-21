@@ -14,8 +14,8 @@ Header::Header(QWidget *parent) : QWidget(parent) {
   m_logo->setFixedHeight(45);
 
   // Header - for logo - or other stuff
-  m_header = new QHBoxLayout();
-  m_header->addWidget(m_logo, 0, Qt::AlignLeft);
+  m_headerLayout = new QHBoxLayout();
+  m_headerLayout->addWidget(m_logo, 0, Qt::AlignLeft);
 }
 
-QHBoxLayout *Header::getLayout() { return this->m_header; }
+QHBoxLayout *Header::getLayout() { return this->m_headerLayout; }
