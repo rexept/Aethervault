@@ -15,7 +15,7 @@ public:
 private:
   QSvgWidget *m_logo;
   QString m_logoPath;
-  QHBoxLayout *m_header;
+  QHBoxLayout *m_headerLayout;
 };
 
 #endif // HEADER_H
