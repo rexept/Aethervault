@@ -1,4 +1,4 @@
-![test](assets/Aethervault-logot.svg)
+![test](assets/Aethervault-logo.svg)
 ---
 This is currently in the alpha phase and will be coming soon...
 
