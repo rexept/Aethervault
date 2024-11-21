@@ -1,3 +1,6 @@
+#ifndef CONTACTPAGE_H
+#define CONTACTPAGE_H
+
 #include <QWidget>
 
 class QLineEdit;
@@ -19,3 +22,5 @@ private:
 
   void setup_input_fields();
 };
+
+#endif // CONTACTPAGE_H
