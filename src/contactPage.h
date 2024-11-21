@@ -17,5 +17,5 @@ private:
   QLineEdit *m_password;
   QLineEdit *m_name;
 
-  void setup_widgets();
+  void setup_input_fields();
 };

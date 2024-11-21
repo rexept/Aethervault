@@ -11,12 +11,12 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_password = new QLineEdit(this);
   m_name = new QLineEdit(this);
 
-  setup_widgets();
+  setup_input_fields();
 }
 
 QVBoxLayout *ContactPage::get_layout() { return m_layout; }
 
-void ContactPage::setup_widgets() {
+void ContactPage::setup_input_fields() {
   m_layout->addWidget(m_website);
   m_layout->addWidget(m_email);
   m_layout->addWidget(m_password);
