@@ -3,8 +3,6 @@
 
 #include <QWidget>
 
-class QLineEdit;
-class QLabel;
 class ContactPage;
 class QVBoxLayout;
 class QHBoxLayout;
