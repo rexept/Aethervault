@@ -4,8 +4,10 @@
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
+  // Init layout
   m_layout = new QVBoxLayout(this);
 
+  // Init input boxes
   m_website = new QLineEdit(this);
   m_email = new QLineEdit(this);
   m_password = new QLineEdit(this);
@@ -18,6 +20,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 QVBoxLayout *ContactPage::getLayout() { return this->m_layout; }
 
 void ContactPage::setupInputFields() {
+  // Add widgets to layout
   m_layout->addWidget(m_website);
   m_layout->addWidget(m_email);
   m_layout->addWidget(m_password);

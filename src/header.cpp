@@ -9,12 +9,13 @@ Header::Header(QWidget *parent) : QWidget(parent) {
   m_logo->load(m_logoPath);
   m_logo->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+  // Values taken from svg file - rounded
   m_logo->setFixedWidth(272);
   m_logo->setFixedHeight(45);
 
   // Header - for logo - or other stuff
   m_header = new QHBoxLayout();
-  m_header->addWidget(m_logo, 2, Qt::AlignLeft);
+  m_header->addWidget(m_logo, 0, Qt::AlignLeft);
 }
 
 QHBoxLayout *Header::getLayout() { return this->m_header; }
