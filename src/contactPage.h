@@ -11,7 +11,7 @@ class ContactPage : public QWidget {
 public:
   explicit ContactPage(QWidget *parent = 0);
 
-  QVBoxLayout *get_layout();
+  QVBoxLayout *getLayout();
 
 private:
   QVBoxLayout *m_layout;
@@ -20,7 +20,7 @@ private:
   QLineEdit *m_password;
   QLineEdit *m_name;
 
-  void setup_input_fields();
+  void setupInputFields();
 };
 
 #endif // CONTACTPAGE_H
