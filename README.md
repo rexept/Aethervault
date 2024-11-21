@@ -1,4 +1,4 @@
-![Aethervault](assets/Aethervault-logo.png)
+![Aethervault](assets/Placeholder-logo.png)
 ---
 This is currently in the alpha phase and will be coming soon...
 
