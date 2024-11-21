@@ -15,11 +15,11 @@ public:
   explicit Window(QWidget *parent = 0);
 
 private:
-  ContactPage *contactPage;
-  Header *header;
-  QSvgWidget *logo;
-  QVBoxLayout *masterLayout;
-  QString logoPath;
+  ContactPage *m_contactPage;
+  Header *m_header;
+  QSvgWidget *m_logo;
+  QVBoxLayout *m_masterLayout;
+  QString m_logoPath;
 };
 
 #endif // WINDOW_H

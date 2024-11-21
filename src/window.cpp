@@ -10,13 +10,13 @@
 #include <QtSvg/QSvgWidget>
 
 Window::Window(QWidget *parent) : QWidget(parent) {
-  contactPage = new ContactPage(this);
-  header = new Header(this);
-  masterLayout = new QVBoxLayout(this);
+  m_contactPage = new ContactPage(this);
+  m_header = new Header(this);
+  m_masterLayout = new QVBoxLayout(this);
 
-  masterLayout->addLayout(header->getLayout());
+  m_masterLayout->addLayout(m_header->getLayout());
 
-  masterLayout->addWidget(contactPage);
+  m_masterLayout->addWidget(m_contactPage);
 
-  setLayout(masterLayout);
+  setLayout(m_masterLayout);
 }
