@@ -40,7 +40,7 @@ void ContactPage::setupInputFields() {
   const QString passwordPlaceholder = "Password";
   const QString firstNamePlaceholder = "First Name";
   const QString lastNamePlaceholder = "Last Name";
-  const QString phoneNumberPlaceholder = "Phone Number 1-(234)-567-8901";
+  const QString phoneNumberPlaceholder = "Phone Number";
   const QString address1Placeholder = "Address 1";
   const QString address2Placeholder = "Address 2";
 
