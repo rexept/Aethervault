@@ -20,6 +20,7 @@ private:
   QLineEdit *m_password;
   QLineEdit *m_firstName;
   QLineEdit *m_lastName;
+  QLineEdit *m_phoneNumber;
   QLineEdit *m_address1;
   QLineEdit *m_address2;
 

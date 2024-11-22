@@ -13,6 +13,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_password = new QLineEdit(this);
   m_firstName = new QLineEdit(this);
   m_lastName = new QLineEdit(this);
+  m_phoneNumber = new QLineEdit(this);
   m_address1 = new QLineEdit(this);
   m_address2 = new QLineEdit(this);
 
@@ -30,6 +31,7 @@ void ContactPage::setupInputFields() {
   m_layout->addWidget(m_password);
   m_layout->addWidget(m_firstName);
   m_layout->addWidget(m_lastName);
+  m_layout->addWidget(m_phoneNumber);
   m_layout->addWidget(m_address1);
   m_layout->addWidget(m_address2);
 
@@ -38,6 +40,7 @@ void ContactPage::setupInputFields() {
   const QString passwordPlaceholder = "Password";
   const QString firstNamePlaceholder = "First Name";
   const QString lastNamePlaceholder = "Last Name";
+  const QString phoneNumberPlaceholder = "Phone Number";
   const QString address1Placeholder = "Address 1";
   const QString address2Placeholder = "Address 2";
 
@@ -46,6 +49,7 @@ void ContactPage::setupInputFields() {
   m_password->setPlaceholderText(passwordPlaceholder);
   m_firstName->setPlaceholderText(firstNamePlaceholder);
   m_lastName->setPlaceholderText(lastNamePlaceholder);
+  m_phoneNumber->setPlaceholderText(phoneNumberPlaceholder);
   m_address1->setPlaceholderText(address1Placeholder);
   m_address2->setPlaceholderText(address2Placeholder);
 }
