@@ -19,4 +19,4 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 Now, just run `make` inside the build directory and run the `Aethervault` executable!
 
 # What it does
-Contact Manager
+Aethervault is a **Contact Manager**
