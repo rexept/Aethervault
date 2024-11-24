@@ -1,6 +1,7 @@
 #include "contactPage.h"
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
@@ -52,4 +53,8 @@ void ContactPage::setupInputFields() {
   m_phoneNumber->setPlaceholderText(phoneNumberPlaceholder);
   m_address1->setPlaceholderText(address1Placeholder);
   m_address2->setPlaceholderText(address2Placeholder);
+}
+
+SaveButton::SaveButton(QWidget *parent) {
+  QPushButton *button = new QPushButton("Save", this);
 }

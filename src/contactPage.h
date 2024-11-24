@@ -27,4 +27,9 @@ private:
   void setupInputFields();
 };
 
+/// This creates a save button for the contact page fields
+class SaveButton : public QWidget {
+public:
+  explicit SaveButton(QWidget *parent = 0);
+};
 #endif // CONTACTPAGE_H
