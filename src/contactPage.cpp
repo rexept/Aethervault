@@ -1,6 +1,7 @@
 #include "contactPage.h"
 #include <QLabel>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 
@@ -19,6 +20,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_address2 = new QLineEdit(this);
 
   setupInputFields();
+  setupSaveButton();
 }
 
 // useless?
@@ -55,6 +57,23 @@ void ContactPage::setupInputFields() {
   m_address2->setPlaceholderText(address2Placeholder);
 }
 
-SaveButton::SaveButton(QWidget *parent) {
-  QPushButton *button = new QPushButton("Save", this);
+void ContactPage::setupSaveButton() {
+  m_saveButton = new QPushButton("Save", this);
+
+  // Don't make it take up whole screen - probably use a new layout
+  m_layout->addWidget(m_saveButton);
+
+  // Connect to QLineEdits
+  connect(m_saveButton, &QPushButton::clicked, this, [this]() {
+	
+    // When the button is clicked, retrieve the text from the QLineEdits
+    QString m_websiteField = m_website->text();
+    QString m_emailField = m_email->text();
+	QString m_passwordField = m_password->text();
+	QString m_firstNameField = m_firstName->text();
+	QString m_lastNameField = m_lastName->text();
+	QString m_phoneNumberField = m_phoneNumber->text();
+	QString m_addressField1 = m_address1->text();
+	QString m_addressField2 = m_address2->text();
+  });
 }

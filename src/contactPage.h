@@ -6,6 +6,7 @@
 class QLineEdit;
 class QLabel;
 class QVBoxLayout;
+class QPushButton;
 
 class ContactPage : public QWidget {
 public:
@@ -24,12 +25,19 @@ private:
   QLineEdit *m_address1;
   QLineEdit *m_address2;
 
-  void setupInputFields();
-};
+  QString *m_websiteField;
+  QString *m_emailField;
+  QString *m_passwordField;
+  QString *m_firstNameField;
+  QString *m_lastNameField;
+  QString *m_phoneNumberField;
+  QString *m_address1Field;
+  QString *m_address2Field;
 
-/// This creates a save button for the contact page fields
-class SaveButton : public QWidget {
-public:
-  explicit SaveButton(QWidget *parent = 0);
+
+  QPushButton *m_saveButton;
+
+  void setupInputFields();
+  void setupSaveButton();
 };
 #endif // CONTACTPAGE_H
