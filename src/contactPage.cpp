@@ -67,13 +67,13 @@ void ContactPage::setupSaveButton() {
   connect(m_saveButton, &QPushButton::clicked, this, [this]() {
 	
     // When the button is clicked, retrieve the text from the QLineEdits
-    QString m_websiteField = m_website->text();
-    QString m_emailField = m_email->text();
-	QString m_passwordField = m_password->text();
-	QString m_firstNameField = m_firstName->text();
-	QString m_lastNameField = m_lastName->text();
-	QString m_phoneNumberField = m_phoneNumber->text();
-	QString m_addressField1 = m_address1->text();
-	QString m_addressField2 = m_address2->text();
+    m_websiteField = m_website->text();
+    m_emailField = m_email->text();
+	m_passwordField = m_password->text();
+	m_firstNameField = m_firstName->text();
+	m_lastNameField = m_lastName->text();
+	m_phoneNumberField = m_phoneNumber->text();
+	m_address1Field = m_address1->text();
+	m_address2Field = m_address2->text();
   });
 }
