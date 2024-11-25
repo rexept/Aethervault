@@ -2,6 +2,7 @@
 #define CONTACTPAGE_H
 
 #include <QWidget>
+#include <QtSql>
 
 class QLineEdit;
 class QLabel;
@@ -16,6 +17,9 @@ public:
   QVBoxLayout *getLayout();
 
 private:
+  QSqlDatabase db;
+  QSqlQuery query;
+
   QVBoxLayout *m_layout;
 
   QLineEdit *m_id;

@@ -4,7 +4,6 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QtSql>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   // Database - SQL
@@ -48,7 +47,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_address2Field = "";
 
   // Database - SQL
-  QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+  db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName(dbName);
   if (!db.open()) {
     qDebug() << "Error: Unable to open the database" << db.lastError().text();
@@ -56,7 +55,6 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   }
 
   // Create contact table (if it doesn't exist)
-  QSqlQuery query;
   if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                   "website TEXT, "
@@ -76,9 +74,6 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   }
   setupInputFields();
   setupSaveButton();
-
-  db.close();
-  qDebug() << "Closed database";
 }
 
 ContactPage::~ContactPage() {
@@ -97,6 +92,10 @@ ContactPage::~ContactPage() {
   delete m_address2;
 
   delete m_saveButton;
+  // Risky although ok because it gets closed before QCoreApplication is deleted
+  // See docs
+  db.close();
+  qDebug() << "Closed database";
   qDebug() << "ContactPage destructed";
 }
 
@@ -159,8 +158,8 @@ void ContactPage::setupSaveButton() {
     /* // Currently only inserts - doesn't update */
     /* query.prepare("INSERT INTO contacts (website, email, password,
      * first_name, " */
-    /*               "last_name, phone_number, address_one, address_two) VALUES
-     * " */
+    /*               "last_name, phone_number, address_one, address_two) VALUES"
+     */
     /*               "(?, ?, ?, ?, ?, ?, ?, ?)"); */
     /* query.addBindValue(m_websiteField); */
     /* query.addBindValue(m_emailField); */
