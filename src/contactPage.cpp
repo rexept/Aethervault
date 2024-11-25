@@ -93,6 +93,8 @@ void ContactPage::setupInputFields() {
   m_layout->addWidget(m_address1);
   m_layout->addWidget(m_address2);
 
+  const QString idPlaceholder =
+      "Id - If you can see this something is broken...";
   const QString websitePlaceholder = "Website";
   const QString emailPlaceholder = "Email";
   const QString passwordPlaceholder = "Password";
@@ -102,6 +104,7 @@ void ContactPage::setupInputFields() {
   const QString address1Placeholder = "Address 1";
   const QString address2Placeholder = "Address 2";
 
+  m_id->setPlaceholderText(idPlaceholder);
   m_website->setPlaceholderText(websitePlaceholder);
   m_email->setPlaceholderText(emailPlaceholder);
   m_password->setPlaceholderText(passwordPlaceholder);
