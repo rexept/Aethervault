@@ -8,7 +8,7 @@ This currently only works Linux
 # Build Instructions
 Follow install instructions at [ libbcrypt ]( https://github.com/trusch/libbcrypt )
 
-Create a build directory and cd into it:
+After following above instructions create a build directory and cd into it:
 ```
 mkdir build
 cd build
