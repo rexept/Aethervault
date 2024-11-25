@@ -20,3 +20,10 @@ Now, just run `make` inside the build directory and run the `Aethervault` execut
 
 # What it does
 Aethervault is a **Contact Manager**
+
+---
+# To-Do
+- [ ] Save to sqql database
+- [ ] Encryption
+- [ ] Make new layout
+- [ ] Add search bar
