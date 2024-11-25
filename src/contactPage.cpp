@@ -121,7 +121,7 @@ void ContactPage::setupSaveButton() {
   m_layout->addWidget(m_saveButton);
   m_layout->setAlignment(m_saveButton, Qt::AlignRight);
 
-  // Connect to QLineEdits
+  // Connect button to QLineEdits
   connect(m_saveButton, &QPushButton::clicked, this, [this]() {
     // When the button is clicked, retrieve the text from the QLineEdits
     m_websiteField = m_website->text();
