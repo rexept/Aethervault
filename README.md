@@ -2,7 +2,8 @@
 
 ---
 
-This is currently in the alpha phase and will be coming soon...
+This is currently in the alpha phase and will be coming soon...\
+This currently only works Linux
 
 # Build Instructions
 Create a build directory and cd into it:
