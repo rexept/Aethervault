@@ -16,6 +16,7 @@ public:
 
 private:
   QVBoxLayout *m_layout;
+
   QLineEdit *m_website;
   QLineEdit *m_email;
   QLineEdit *m_password;
@@ -33,7 +34,6 @@ private:
   QString m_phoneNumberField;
   QString m_address1Field;
   QString m_address2Field;
-
 
   QPushButton *m_saveButton;
 

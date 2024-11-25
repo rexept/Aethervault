@@ -71,20 +71,19 @@ void ContactPage::setupInputFields() {
 void ContactPage::setupSaveButton() {
   m_saveButton = new QPushButton("Save", this);
 
-  // Don't make it take up whole screen - probably use a new layout
   m_layout->addWidget(m_saveButton);
+  m_layout->setAlignment(m_saveButton, Qt::AlignRight);
 
   // Connect to QLineEdits
   connect(m_saveButton, &QPushButton::clicked, this, [this]() {
-	
     // When the button is clicked, retrieve the text from the QLineEdits
     m_websiteField = m_website->text();
     m_emailField = m_email->text();
-	m_passwordField = m_password->text();
-	m_firstNameField = m_firstName->text();
-	m_lastNameField = m_lastName->text();
-	m_phoneNumberField = m_phoneNumber->text();
-	m_address1Field = m_address1->text();
-	m_address2Field = m_address2->text();
+    m_passwordField = m_password->text();
+    m_firstNameField = m_firstName->text();
+    m_lastNameField = m_lastName->text();
+    m_phoneNumberField = m_phoneNumber->text();
+    m_address1Field = m_address1->text();
+    m_address2Field = m_address2->text();
   });
 }
