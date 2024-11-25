@@ -19,6 +19,17 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_address1 = new QLineEdit(this);
   m_address2 = new QLineEdit(this);
 
+  // Init default values for field inputs - blank
+  // Does this handle blanks correctly?
+  m_websiteField = "";
+  m_emailField = "";
+  m_passwordField = "";
+  m_firstNameField = "";
+  m_lastNameField = "";
+  m_phoneNumberField = "";
+  m_address1Field = "";
+  m_address2Field = "";
+
   setupInputFields();
   setupSaveButton();
 }
