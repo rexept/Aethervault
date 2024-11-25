@@ -2,6 +2,7 @@
 #include "contactPage.h"
 #include "header.h"
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -26,4 +27,5 @@ Window::~Window() {
   delete m_contactPage;
   delete m_header;
   delete m_masterLayout;
+  qDebug() << "Window destructed";
 }

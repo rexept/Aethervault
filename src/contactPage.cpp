@@ -97,6 +97,7 @@ ContactPage::~ContactPage() {
   delete m_address2;
 
   delete m_saveButton;
+  qDebug() << "ContactPage destructed";
 }
 
 // useless?

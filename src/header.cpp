@@ -1,4 +1,5 @@
 #include "header.h"
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QSvgWidget>
 
@@ -21,6 +22,7 @@ Header::Header(QWidget *parent) : QWidget(parent) {
 Header::~Header() {
   delete m_logo;
   delete m_headerLayout;
+  qDebug() << "Header destructed";
 }
 
 QHBoxLayout *Header::getLayout() { return this->m_headerLayout; }
