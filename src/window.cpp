@@ -21,3 +21,9 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 
   setLayout(m_masterLayout);
 }
+
+Window::~Window() {
+  delete m_contactPage;
+  delete m_header;
+  delete m_masterLayout;
+}

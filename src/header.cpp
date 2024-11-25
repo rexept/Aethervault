@@ -18,4 +18,9 @@ Header::Header(QWidget *parent) : QWidget(parent) {
   m_headerLayout->addWidget(m_logo, 0, Qt::AlignLeft);
 }
 
+Header::~Header() {
+  delete m_logo;
+  delete m_headerLayout;
+}
+
 QHBoxLayout *Header::getLayout() { return this->m_headerLayout; }

@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QtSql>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   // Database - SQL
@@ -12,36 +13,11 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 
   qDebug() << "Config directory: " + configDir;
 
+  QDir dbDir;
+  dbDir.mkdir(configDir + "/aethervault");
   const QString dbName = configDir + "/aethervault/aether.db";
 
   qDebug() << "Database path: " + dbName;
-
-  db = QSqlDatabase::addDatabase("QSQLITE");
-  db.setDatabaseName(dbName);
-  if (!db.open()) {
-    qDebug() << "Error: Unable to open the database";
-    QMessageBox::warning(nullptr, "Error!",
-                         "Error: Unable to open the database");
-  }
-
-  // Create contact table (if it doesn't exist)
-  if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
-                  "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                  "website TEXT, "
-                  "email TEXT, "
-                  "password_hash TEXT, "
-                  "first_name TEXT, "
-                  "last_name TEXT, "
-                  "phone_number TEXT, "
-                  "address_one TEXT, "
-                  "address_two TEXT)")) {
-    qDebug() << "Error: Unable to make contacts table"
-             << query.lastError().text();
-    QMessageBox::warning(nullptr, "Error!",
-                         "Error: Unable to make contacts table");
-  } else {
-    qDebug() << "Initiated contacts table";
-  }
 
   // Init layout
   m_layout = new QVBoxLayout(this);
@@ -71,8 +47,56 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_address1Field = "";
   m_address2Field = "";
 
+  // Database - SQL
+  QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+  db.setDatabaseName(dbName);
+  if (!db.open()) {
+    qDebug() << "Error: Unable to open the database" << db.lastError().text();
+    QMessageBox::warning(this, "Error!", "Error: Unable to open the database");
+  }
+
+  // Create contact table (if it doesn't exist)
+  QSqlQuery query;
+  if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
+                  "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  "website TEXT, "
+                  "email TEXT, "
+                  "password_hash TEXT, "
+                  "first_name TEXT, "
+                  "last_name TEXT, "
+                  "phone_number TEXT, "
+                  "address_one TEXT, "
+                  "address_two TEXT)")) {
+    qDebug() << "Error: Unable to make contacts table"
+             << query.lastError().text();
+    QMessageBox::warning(this, "Error!",
+                         "Error: Unable to make contacts table");
+  } else {
+    qDebug() << "Initiated contacts table";
+  }
   setupInputFields();
   setupSaveButton();
+
+  db.close();
+  qDebug() << "Closed database";
+}
+
+ContactPage::~ContactPage() {
+  delete m_layout;
+
+  delete m_id;
+  delete m_idLabel;
+
+  delete m_website;
+  delete m_email;
+  delete m_password;
+  delete m_firstName;
+  delete m_lastName;
+  delete m_phoneNumber;
+  delete m_address1;
+  delete m_address2;
+
+  delete m_saveButton;
 }
 
 // useless?
@@ -130,5 +154,20 @@ void ContactPage::setupSaveButton() {
     m_phoneNumberField = m_phoneNumber->text();
     m_address1Field = m_address1->text();
     m_address2Field = m_address2->text();
+
+    /* // Currently only inserts - doesn't update */
+    /* query.prepare("INSERT INTO contacts (website, email, password,
+     * first_name, " */
+    /*               "last_name, phone_number, address_one, address_two) VALUES
+     * " */
+    /*               "(?, ?, ?, ?, ?, ?, ?, ?)"); */
+    /* query.addBindValue(m_websiteField); */
+    /* query.addBindValue(m_emailField); */
+    /* query.addBindValue(m_passwordField); */
+    /* query.addBindValue(m_firstNameField); */
+    /* query.addBindValue(m_lastNameField); */
+    /* query.addBindValue(m_phoneNumberField); */
+    /* query.addBindValue(m_address1Field); */
+    /* query.addBindValue(m_address2Field); */
   });
 }

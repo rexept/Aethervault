@@ -2,7 +2,6 @@
 #define CONTACTPAGE_H
 
 #include <QWidget>
-#include <QtSql>
 
 class QLineEdit;
 class QLabel;
@@ -12,13 +11,11 @@ class QPushButton;
 class ContactPage : public QWidget {
 public:
   explicit ContactPage(QWidget *parent = 0);
+  ~ContactPage();
 
   QVBoxLayout *getLayout();
 
 private:
-  QSqlDatabase db;
-  QSqlQuery query;
-
   QVBoxLayout *m_layout;
 
   QLineEdit *m_id;

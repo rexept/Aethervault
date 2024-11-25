@@ -9,6 +9,7 @@ class QHBoxLayout;
 class Header : public QWidget {
 public:
   explicit Header(QWidget *parent = 0);
+  ~Header();
 
   QHBoxLayout *getLayout();
 

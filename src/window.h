@@ -13,11 +13,11 @@ class QString;
 class Window : public QWidget {
 public:
   explicit Window(QWidget *parent = 0);
+  ~Window();
 
 private:
   ContactPage *m_contactPage;
   Header *m_header;
-  QSvgWidget *m_logo;
   QVBoxLayout *m_masterLayout;
   QString m_logoPath;
 };
