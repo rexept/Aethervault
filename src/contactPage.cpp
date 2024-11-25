@@ -6,6 +6,24 @@
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
+  // Database - SQL
+  const QString configDir =
+      QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+
+  qDebug() << "Config directory: " + configDir;
+
+  const QString dbName = configDir + "/aethervault/db.sqlite";
+
+  qDebug() << "Database path: " + dbName;
+
+  db = QSqlDatabase::addDatabase("QSQLITE");
+  db.setDatabaseName(dbName);
+  if (!db.open()) {
+    qDebug() << "Error: Unable to open the database";
+    QMessageBox::warning(nullptr, "Error!",
+                         "Error: Unable to open the database");
+  }
+
   // Init layout
   m_layout = new QVBoxLayout(this);
 
