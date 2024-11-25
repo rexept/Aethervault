@@ -5,7 +5,7 @@
 This is currently in the alpha phase and will be coming soon...\
 This currently only works Linux
 
-# Build Instructions
+# Build Instructions (developement)
 Create a build directory and cd into it:
 ```
 mkdir build
