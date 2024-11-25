@@ -6,6 +6,7 @@
 class QLineEdit;
 class QLabel;
 class QVBoxLayout;
+class QPushButton;
 
 class ContactPage : public QWidget {
 public:
@@ -15,6 +16,7 @@ public:
 
 private:
   QVBoxLayout *m_layout;
+
   QLineEdit *m_website;
   QLineEdit *m_email;
   QLineEdit *m_password;
@@ -24,7 +26,18 @@ private:
   QLineEdit *m_address1;
   QLineEdit *m_address2;
 
-  void setupInputFields();
-};
+  QString m_websiteField;
+  QString m_emailField;
+  QString m_passwordField;
+  QString m_firstNameField;
+  QString m_lastNameField;
+  QString m_phoneNumberField;
+  QString m_address1Field;
+  QString m_address2Field;
 
+  QPushButton *m_saveButton;
+
+  void setupInputFields();
+  void setupSaveButton();
+};
 #endif // CONTACTPAGE_H

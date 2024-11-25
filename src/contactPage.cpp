@@ -1,6 +1,8 @@
 #include "contactPage.h"
 #include <QLabel>
 #include <QLineEdit>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
@@ -17,7 +19,19 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_address1 = new QLineEdit(this);
   m_address2 = new QLineEdit(this);
 
+  // Init default values for field inputs - blank
+  // Does this handle blanks correctly?
+  m_websiteField = "";
+  m_emailField = "";
+  m_passwordField = "";
+  m_firstNameField = "";
+  m_lastNameField = "";
+  m_phoneNumberField = "";
+  m_address1Field = "";
+  m_address2Field = "";
+
   setupInputFields();
+  setupSaveButton();
 }
 
 // useless?
@@ -52,4 +66,24 @@ void ContactPage::setupInputFields() {
   m_phoneNumber->setPlaceholderText(phoneNumberPlaceholder);
   m_address1->setPlaceholderText(address1Placeholder);
   m_address2->setPlaceholderText(address2Placeholder);
+}
+
+void ContactPage::setupSaveButton() {
+  m_saveButton = new QPushButton("Save", this);
+
+  m_layout->addWidget(m_saveButton);
+  m_layout->setAlignment(m_saveButton, Qt::AlignRight);
+
+  // Connect to QLineEdits
+  connect(m_saveButton, &QPushButton::clicked, this, [this]() {
+    // When the button is clicked, retrieve the text from the QLineEdits
+    m_websiteField = m_website->text();
+    m_emailField = m_email->text();
+    m_passwordField = m_password->text();
+    m_firstNameField = m_firstName->text();
+    m_lastNameField = m_lastName->text();
+    m_phoneNumberField = m_phoneNumber->text();
+    m_address1Field = m_address1->text();
+    m_address2Field = m_address2->text();
+  });
 }
