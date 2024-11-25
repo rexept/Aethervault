@@ -6,6 +6,8 @@ This is currently in the alpha phase and will be coming soon...\
 This currently only works Linux
 
 # Build Instructions
+Follow install instructions at [ libbcrypt ]( https://github.com/trusch/libbcrypt )
+
 Create a build directory and cd into it:
 ```
 mkdir build
