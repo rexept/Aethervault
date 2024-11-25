@@ -20,6 +20,9 @@ private:
 
   QVBoxLayout *m_layout;
 
+  QLineEdit *m_id;
+  QLabel *m_idLabel;
+
   QLineEdit *m_website;
   QLineEdit *m_email;
   QLineEdit *m_password;

@@ -3,6 +3,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSqlQuery>
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
@@ -12,7 +13,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 
   qDebug() << "Config directory: " + configDir;
 
-  const QString dbName = configDir + "/aethervault/db.sqlite";
+  const QString dbName = configDir + "/aethervault/aether.db";
 
   qDebug() << "Database path: " + dbName;
 
@@ -24,10 +25,31 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
                          "Error: Unable to open the database");
   }
 
+  // Create contact table (if it doesn't exist)
+  QSqlQuery query;
+  if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
+                  "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  "website TEXT, "
+                  "email TEXT, "
+                  "password_hash TEXT, "
+                  "first_name TEXT, "
+                  "last_name TEXT, "
+                  "phone_number TEXT, "
+                  "address_one TEXT, "
+                  "address_two TEXT)")) {
+    qDebug() << "Error: Unable to make contacts table"
+             << query.lastError().text();
+    QMessageBox::warning(nullptr, "Error!",
+                         "Error: Unable to make contacts table");
+  } else {
+    qDebug() << "Initiated contacts table";
+  }
+
   // Init layout
   m_layout = new QVBoxLayout(this);
 
   // Init input boxes
+  m_id = new QLineEdit(this);
   m_website = new QLineEdit(this);
   m_email = new QLineEdit(this);
   m_password = new QLineEdit(this);
@@ -36,6 +58,9 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_phoneNumber = new QLineEdit(this);
   m_address1 = new QLineEdit(this);
   m_address2 = new QLineEdit(this);
+
+  // Make m_id non-editable
+  m_id->setReadOnly(true);
 
   // Init default values for field inputs - blank
   // Does this handle blanks correctly?
@@ -58,6 +83,7 @@ QVBoxLayout *ContactPage::getLayout() { return this->m_layout; }
 /// Adds widgets to layout and sets their respective placeholders
 void ContactPage::setupInputFields() {
   // Add widgets to layout
+  m_layout->addWidget(m_id);
   m_layout->addWidget(m_website);
   m_layout->addWidget(m_email);
   m_layout->addWidget(m_password);
