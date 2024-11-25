@@ -10,17 +10,11 @@ project(Aethervault VERSION 1.0 LANGUAGES CXX)
 # Find the Qt5 modules
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Svg Sql)
 
-# Bcrypt
-find_package(bcrypt REQUIRED)
-
 # Add the executable target
 add_executable(Aethervault ${SOURCES})
 
 # Link against the Qt5 libraries
 target_link_libraries(Aethervault PRIVATE Qt5::Core Qt5::Widgets Qt5::Svg Qt5::Sql)
-
-# Link Bcrypt
-target_link_libraries(Aethervault bcrypt)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
