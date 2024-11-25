@@ -17,6 +17,7 @@ public:
 
 private:
   QSqlDatabase db;
+  QSqlQuery query;
 
   QVBoxLayout *m_layout;
 

@@ -3,7 +3,6 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QSqlQuery>
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
@@ -26,7 +25,6 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   }
 
   // Create contact table (if it doesn't exist)
-  QSqlQuery query;
   if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                   "website TEXT, "
