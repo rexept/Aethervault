@@ -34,6 +34,9 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   // Make m_id non-editable
   m_id->setReadOnly(true);
 
+  // Hide password
+  m_password->setEchoMode(QLineEdit::Password);
+
   // Init default values for field inputs - blank
   // Does this handle blanks correctly?
   m_websiteField = "";
@@ -59,7 +62,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                   "website TEXT, "
                   "email TEXT, "
-                  "password_hash TEXT, "
+                  "password TEXT, "
                   "first_name TEXT, "
                   "last_name TEXT, "
                   "phone_number TEXT, "
@@ -161,10 +164,9 @@ void ContactPage::setupSaveButton() {
 
     // Currently only inserts - doesn't update
     QSqlQuery query;
-    query.prepare(
-        "INSERT INTO contacts (website, email, password_hash, first_name, "
-        "last_name, phone_number, address_one, address_two) VALUES"
-        "(?, ?, ?, ?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO contacts (website, email, password, first_name, "
+                  "last_name, phone_number, address_one, address_two) VALUES"
+                  "(?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(m_websiteField);
     query.addBindValue(m_emailField);
     query.addBindValue(m_passwordField);
