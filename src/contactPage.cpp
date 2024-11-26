@@ -54,6 +54,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   }
 
   // Create contact table (if it doesn't exist)
+  QSqlQuery query(db);
   if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                   "website TEXT, "
@@ -72,7 +73,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
     qDebug() << "Initiated contacts table";
   }
   setupInputFields();
-  setupSaveButton();
+  setupSaveButton(query);
 }
 
 void ContactPage::closeDatabase() {
@@ -139,14 +140,14 @@ void ContactPage::setupInputFields() {
   m_address2->setPlaceholderText(address2Placeholder);
 }
 
-void ContactPage::setupSaveButton() {
+void ContactPage::setupSaveButton(QSqlQuery query) {
   m_saveButton = new QPushButton("Save", this);
 
   m_layout->addWidget(m_saveButton);
   m_layout->setAlignment(m_saveButton, Qt::AlignRight);
 
   // Connect button to QLineEdits
-  connect(m_saveButton, &QPushButton::clicked, this, [this]() {
+  connect(m_saveButton, &QPushButton::clicked, this, [&, this]() {
     // When the button is clicked, retrieve the text from the QLineEdits
     m_websiteField = m_website->text();
     m_emailField = m_email->text();
@@ -169,5 +170,12 @@ void ContactPage::setupSaveButton() {
     query.addBindValue(m_phoneNumberField);
     query.addBindValue(m_address1Field);
     query.addBindValue(m_address2Field);
+
+    if (!query.exec()) {
+      qDebug() << "Error: Failed to insert contact to database"
+               << query.lastError().text();
+      QMessageBox::warning(this, "Error!",
+                           "Error: Failed to insert contact to database");
+    }
   });
 }

@@ -19,7 +19,6 @@ public:
 
 private:
   QSqlDatabase db;
-  QSqlQuery query;
 
   QString configDir;
   QString dbName;
@@ -50,6 +49,6 @@ private:
   QPushButton *m_saveButton;
 
   void setupInputFields();
-  void setupSaveButton();
+  void setupSaveButton(QSqlQuery query);
 };
 #endif // CONTACTPAGE_H
