@@ -73,11 +73,13 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
     qDebug() << "Initiated contacts table";
   }
   setupInputFields();
-  setupSaveButton(query);
+  setupSaveButton();
 }
 
 void ContactPage::closeDatabase() {
   // Do I also have to remove??
+  // Risky although ok because it gets closed before QCoreApplication is deleted
+  // See docs
   this->db.close();
   qDebug() << "Closed database";
 }
@@ -98,8 +100,6 @@ ContactPage::~ContactPage() {
   delete m_address2;
 
   delete m_saveButton;
-  // Risky although ok because it gets closed before QCoreApplication is deleted
-  // See docs
   qDebug() << "ContactPage destructed";
 }
 
@@ -141,7 +141,7 @@ void ContactPage::setupInputFields() {
   m_address2->setPlaceholderText(address2Placeholder);
 }
 
-void ContactPage::setupSaveButton(QSqlQuery query) {
+void ContactPage::setupSaveButton() {
   m_saveButton = new QPushButton("Save", this);
 
   m_layout->addWidget(m_saveButton);
@@ -160,9 +160,11 @@ void ContactPage::setupSaveButton(QSqlQuery query) {
     m_address2Field = m_address2->text();
 
     // Currently only inserts - doesn't update
-    query.prepare("INSERT INTO contacts (website, email, password, first_name, "
-                  "last_name, phone_number, address_one, address_two) VALUES"
-                  "(?, ?, ?, ?, ?, ?, ?, ?)");
+    QSqlQuery query;
+    query.prepare(
+        "INSERT INTO contacts (website, email, password_hash, first_name, "
+        "last_name, phone_number, address_one, address_two) VALUES"
+        "(?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(m_websiteField);
     query.addBindValue(m_emailField);
     query.addBindValue(m_passwordField);

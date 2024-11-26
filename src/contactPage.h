@@ -49,6 +49,6 @@ private:
   QPushButton *m_saveButton;
 
   void setupInputFields();
-  void setupSaveButton(QSqlQuery query);
+  void setupSaveButton();
 };
 #endif // CONTACTPAGE_H
