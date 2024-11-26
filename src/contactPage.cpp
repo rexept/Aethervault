@@ -77,6 +77,8 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 }
 
 ContactPage::~ContactPage() {
+  db.close();
+  qDebug() << "Closed database";
   delete m_layout;
 
   delete m_id;
@@ -94,8 +96,6 @@ ContactPage::~ContactPage() {
   delete m_saveButton;
   // Risky although ok because it gets closed before QCoreApplication is deleted
   // See docs
-  db.close();
-  qDebug() << "Closed database";
   qDebug() << "ContactPage destructed";
 }
 
@@ -155,19 +155,17 @@ void ContactPage::setupSaveButton() {
     m_address1Field = m_address1->text();
     m_address2Field = m_address2->text();
 
-    /* // Currently only inserts - doesn't update */
-    /* query.prepare("INSERT INTO contacts (website, email, password,
-     * first_name, " */
-    /*               "last_name, phone_number, address_one, address_two) VALUES"
-     */
-    /*               "(?, ?, ?, ?, ?, ?, ?, ?)"); */
-    /* query.addBindValue(m_websiteField); */
-    /* query.addBindValue(m_emailField); */
-    /* query.addBindValue(m_passwordField); */
-    /* query.addBindValue(m_firstNameField); */
-    /* query.addBindValue(m_lastNameField); */
-    /* query.addBindValue(m_phoneNumberField); */
-    /* query.addBindValue(m_address1Field); */
-    /* query.addBindValue(m_address2Field); */
+    // Currently only inserts - doesn't update
+    query.prepare("INSERT INTO contacts (website, email, password, first_name, "
+                  "last_name, phone_number, address_one, address_two) VALUES"
+                  "(?, ?, ?, ?, ?, ?, ?, ?)");
+    query.addBindValue(m_websiteField);
+    query.addBindValue(m_emailField);
+    query.addBindValue(m_passwordField);
+    query.addBindValue(m_firstNameField);
+    query.addBindValue(m_lastNameField);
+    query.addBindValue(m_phoneNumberField);
+    query.addBindValue(m_address1Field);
+    query.addBindValue(m_address2Field);
   });
 }
