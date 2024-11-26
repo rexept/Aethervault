@@ -77,6 +77,7 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 }
 
 void ContactPage::closeDatabase() {
+  // Do I also have to remove??
   this->db.close();
   qDebug() << "Closed database";
 }
