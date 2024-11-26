@@ -75,9 +75,12 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   setupSaveButton();
 }
 
-ContactPage::~ContactPage() {
-  db.close();
+void ContactPage::closeDatabase() {
+  this->db.close();
   qDebug() << "Closed database";
+}
+
+ContactPage::~ContactPage() {
   delete m_layout;
 
   delete m_id;

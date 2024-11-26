@@ -24,6 +24,7 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 }
 
 Window::~Window() {
+  m_contactPage->closeDatabase();
   delete m_contactPage;
   delete m_header;
   delete m_masterLayout;

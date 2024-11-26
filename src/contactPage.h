@@ -15,6 +15,7 @@ public:
   ~ContactPage();
 
   QVBoxLayout *getLayout();
+  void closeDatabase();
 
 private:
   QSqlDatabase db;
