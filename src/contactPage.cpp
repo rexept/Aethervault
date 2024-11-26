@@ -7,14 +7,13 @@
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   // Database - SQL
-  const QString configDir =
-      QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+  configDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 
   qDebug() << "Config directory: " + configDir;
 
   QDir dbDir;
   dbDir.mkdir(configDir + "/aethervault");
-  const QString dbName = configDir + "/aethervault/aether.db";
+  dbName = configDir + "/aethervault/aether.db";
 
   qDebug() << "Database path: " + dbName;
 

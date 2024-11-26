@@ -20,6 +20,9 @@ private:
   QSqlDatabase db;
   QSqlQuery query;
 
+  QString configDir;
+  QString dbName;
+
   QVBoxLayout *m_layout;
 
   QLineEdit *m_id;
