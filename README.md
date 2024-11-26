@@ -26,7 +26,7 @@ Aethervault is a **Contact Manager**
 
 ---
 # To-Do
-- [ ] Save to SQL database
+- [x] Save to SQL database
 - [ ] Encryption
 - [ ] Make new layout
 - [ ] Add search bar
