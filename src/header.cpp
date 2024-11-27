@@ -15,14 +15,10 @@ Header::Header(QWidget *parent) : QWidget(parent) {
   m_logo->setFixedHeight(45);
 
   // Header - for logo - or other stuff
-  m_headerLayout = new QHBoxLayout();
+  m_headerLayout = new QHBoxLayout(this);
   m_headerLayout->addWidget(m_logo, 0, Qt::AlignLeft);
 }
 
-Header::~Header() {
-  delete m_logo;
-  delete m_headerLayout;
-  qDebug() << "Header destructed";
-}
+Header::~Header() { qDebug() << "Header destructed"; }
 
 QHBoxLayout *Header::getLayout() { return this->m_headerLayout; }
