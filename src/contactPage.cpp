@@ -1,4 +1,5 @@
 #include "contactPage.h"
+#include <QAction>
 #include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
@@ -6,6 +7,8 @@
 #include <QVBoxLayout>
 
 ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
+  // Init
+  passwordIsShown = false;
   // Database - SQL
   configDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 
@@ -36,6 +39,25 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
 
   // Hide password
   m_password->setEchoMode(QLineEdit::Password);
+
+  QAction *togglePasswordVisibility = m_password->addAction(
+      QIcon("assets/eye-slash-solid.png"), QLineEdit::TrailingPosition);
+
+  connect(togglePasswordVisibility, &QAction::triggered, this,
+          [this, togglePasswordVisibility]() {
+            if (!passwordIsShown) {
+              m_password->setEchoMode(QLineEdit::Normal);
+              togglePasswordVisibility->setIcon(QIcon("assets/eye-solid.png"));
+
+              passwordIsShown = true;
+            } else {
+              m_password->setEchoMode(QLineEdit::Password);
+              togglePasswordVisibility->setIcon(
+                  QIcon("assets/eye-slash-solid.png"));
+
+              passwordIsShown = false;
+            }
+          });
 
   // Database - SQL
   db = QSqlDatabase::addDatabase("QSQLITE");

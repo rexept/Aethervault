@@ -24,6 +24,7 @@ private:
   QString dbName;
 
   QVBoxLayout *m_layout;
+  bool passwordIsShown;
 
   QLineEdit *m_id;
 
