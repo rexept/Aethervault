@@ -26,7 +26,6 @@ private:
   QVBoxLayout *m_layout;
 
   QLineEdit *m_id;
-  QLabel *m_idLabel;
 
   QLineEdit *m_website;
   QLineEdit *m_email;
@@ -36,17 +35,6 @@ private:
   QLineEdit *m_phoneNumber;
   QLineEdit *m_address1;
   QLineEdit *m_address2;
-
-  QString m_websiteField;
-  QString m_emailField;
-  QString m_passwordField;
-  QString m_firstNameField;
-  QString m_lastNameField;
-  QString m_phoneNumberField;
-  QString m_address1Field;
-  QString m_address2Field;
-
-  QPushButton *m_saveButton;
 
   void setupInputFields();
   void setupSaveButton();

@@ -37,17 +37,6 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   // Hide password
   m_password->setEchoMode(QLineEdit::Password);
 
-  // Init default values for field inputs - blank
-  // Does this handle blanks correctly?
-  m_websiteField = "";
-  m_emailField = "";
-  m_passwordField = "";
-  m_firstNameField = "";
-  m_lastNameField = "";
-  m_phoneNumberField = "";
-  m_address1Field = "";
-  m_address2Field = "";
-
   // Database - SQL
   db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName(dbName);
@@ -87,24 +76,7 @@ void ContactPage::closeDatabase() {
   qDebug() << "Closed database";
 }
 
-ContactPage::~ContactPage() {
-  delete m_layout;
-
-  delete m_id;
-  delete m_idLabel;
-
-  delete m_website;
-  delete m_email;
-  delete m_password;
-  delete m_firstName;
-  delete m_lastName;
-  delete m_phoneNumber;
-  delete m_address1;
-  delete m_address2;
-
-  delete m_saveButton;
-  qDebug() << "ContactPage destructed";
-}
+ContactPage::~ContactPage() { qDebug() << "ContactPage destructed"; }
 
 // useless?
 QVBoxLayout *ContactPage::getLayout() const { return this->m_layout; }
@@ -145,25 +117,25 @@ void ContactPage::setupInputFields() {
 }
 
 void ContactPage::setupSaveButton() {
-  m_saveButton = new QPushButton("Save", this);
+  QPushButton *saveButton = new QPushButton("Save", this);
 
-  m_layout->addWidget(m_saveButton);
-  m_layout->setAlignment(m_saveButton, Qt::AlignRight);
+  m_layout->addWidget(saveButton);
+  m_layout->setAlignment(saveButton, Qt::AlignRight);
 
   // Connect button to QLineEdits
-  connect(m_saveButton, &QPushButton::clicked, this, [&, this]() {
+  connect(saveButton, &QPushButton::clicked, this, [&, this]() {
     // When the button is clicked, retrieve the text from the QLineEdits
-    m_websiteField = m_website->text();
-    m_emailField = m_email->text();
-    m_passwordField = m_password->text();
-    m_firstNameField = m_firstName->text();
-    m_lastNameField = m_lastName->text();
-    m_phoneNumberField = m_phoneNumber->text();
-    m_address1Field = m_address1->text();
-    m_address2Field = m_address2->text();
+    QString m_websiteField = m_website->text();
+    QString m_emailField = m_email->text();
+    QString m_passwordField = m_password->text();
+    QString m_firstNameField = m_firstName->text();
+    QString m_lastNameField = m_lastName->text();
+    QString m_phoneNumberField = m_phoneNumber->text();
+    QString m_address1Field = m_address1->text();
+    QString m_address2Field = m_address2->text();
 
     // Currently only inserts - doesn't update
-    QSqlQuery query;
+    QSqlQuery query(db);
     query.prepare("INSERT INTO contacts (website, email, password, first_name, "
                   "last_name, phone_number, address_one, address_two) VALUES"
                   "(?, ?, ?, ?, ?, ?, ?, ?)");
