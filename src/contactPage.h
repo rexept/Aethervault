@@ -14,7 +14,7 @@ public:
   explicit ContactPage(QWidget *parent = 0);
   ~ContactPage();
 
-  QVBoxLayout *getLayout();
+  QVBoxLayout *getLayout() const;
   void closeDatabase();
 
 private:

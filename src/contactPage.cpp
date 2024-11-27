@@ -107,7 +107,7 @@ ContactPage::~ContactPage() {
 }
 
 // useless?
-QVBoxLayout *ContactPage::getLayout() { return this->m_layout; }
+QVBoxLayout *ContactPage::getLayout() const { return this->m_layout; }
 
 /// Adds widgets to layout and sets their respective placeholders
 void ContactPage::setupInputFields() {
