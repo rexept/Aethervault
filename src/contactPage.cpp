@@ -41,19 +41,19 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   m_password->setEchoMode(QLineEdit::Password);
 
   QAction *togglePasswordVisibility = m_password->addAction(
-      QIcon("assets/eye-slash-solid.png"), QLineEdit::TrailingPosition);
+      QIcon("../assets/eye-slash-solid.png"), QLineEdit::TrailingPosition);
 
   connect(togglePasswordVisibility, &QAction::triggered, this,
           [this, togglePasswordVisibility]() {
             if (!passwordIsShown) {
               m_password->setEchoMode(QLineEdit::Normal);
-              togglePasswordVisibility->setIcon(QIcon("assets/eye-solid.png"));
+              togglePasswordVisibility->setIcon(QIcon("../assets/eye-solid.png"));
 
               passwordIsShown = true;
             } else {
               m_password->setEchoMode(QLineEdit::Password);
               togglePasswordVisibility->setIcon(
-                  QIcon("assets/eye-slash-solid.png"));
+                  QIcon("../assets/eye-slash-solid.png"));
 
               passwordIsShown = false;
             }
