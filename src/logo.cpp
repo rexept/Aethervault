@@ -1,9 +1,9 @@
-#include "header.h"
+#include "logo.h"
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QSvgWidget>
 
-Header::Header(QWidget *parent) : QWidget(parent) {
+Logo::Logo(QWidget *parent) : QWidget(parent) {
   m_logo = new QSvgWidget(this);
 
   m_logoPath = "../assets/Aethervault-logot.svg";
@@ -19,6 +19,6 @@ Header::Header(QWidget *parent) : QWidget(parent) {
   m_headerLayout->addWidget(m_logo, 0, Qt::AlignLeft);
 }
 
-Header::~Header() { qDebug() << "Header destructed"; }
+Logo::~Logo() { qDebug() << "Logo destructed"; }
 
-QHBoxLayout *Header::getLayout() { return this->m_headerLayout; }
+QHBoxLayout *Logo::getLayout() { return this->m_headerLayout; }

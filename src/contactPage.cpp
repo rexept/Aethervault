@@ -6,7 +6,9 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
+ContactPage::ContactPage(QString dbUsername, QString dbPassword,
+                         QWidget *parent)
+    : QWidget(parent) {
   // Init
   passwordIsShown = false;
   // Database - SQL
@@ -47,7 +49,8 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
           [this, togglePasswordVisibility]() {
             if (!passwordIsShown) {
               m_password->setEchoMode(QLineEdit::Normal);
-              togglePasswordVisibility->setIcon(QIcon("../assets/eye-solid.png"));
+              togglePasswordVisibility->setIcon(
+                  QIcon("../assets/eye-solid.png"));
 
               passwordIsShown = true;
             } else {
@@ -62,9 +65,14 @@ ContactPage::ContactPage(QWidget *parent) : QWidget(parent) {
   // Database - SQL
   db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName(dbName);
+  db.setUserName(dbUsername);
+  db.setPassword(dbPassword);
+
   if (!db.open()) {
     qDebug() << "Error: Unable to open the database" << db.lastError().text();
     QMessageBox::warning(this, "Error!", "Error: Unable to open the database");
+  } else {
+    qDebug() << "Database Opened";
   }
 
   // Create contact table (if it doesn't exist)

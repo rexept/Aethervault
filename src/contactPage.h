@@ -11,7 +11,8 @@ class QPushButton;
 
 class ContactPage : public QWidget {
 public:
-  explicit ContactPage(QWidget *parent = 0);
+  explicit ContactPage(QString dbUsername, QString dbPassword,
+                       QWidget *parent = 0);
   ~ContactPage();
 
   QVBoxLayout *getLayout() const;

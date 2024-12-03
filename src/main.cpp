@@ -1,5 +1,8 @@
+#include "login.h"
 #include "window.h"
 #include <QApplication>
+#include <QDebug>
+#include <QDialog>
 
 int main(int argc, char **argv) {
   const QString NAME = "Aethervault";
@@ -9,8 +12,14 @@ int main(int argc, char **argv) {
   app.setApplicationName(NAME);
   app.setApplicationVersion(VERSION);
 
-  Window window;
-  window.show();
+  Login login;
+  // Make sure login button is clicked
+  if (login.exec()) {
+    Window *window = new Window(login.getUsername(), login.getPassword());
+    window->show();
+  } else {
+    qDebug() << "Login failed or cancelled.";
+  }
 
   return app.exec();
 }

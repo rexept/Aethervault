@@ -1,15 +1,15 @@
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef LOGO_H
+#define LOGO_H
 
 #include <QWidget>
 
 class QSvgWidget;
 class QHBoxLayout;
 
-class Header : public QWidget {
+class Logo : public QWidget {
 public:
-  explicit Header(QWidget *parent = 0);
-  ~Header();
+  explicit Logo(QWidget *parent = 0);
+  ~Logo();
 
   QHBoxLayout *getLayout();
 
@@ -19,4 +19,4 @@ private:
   QHBoxLayout *m_headerLayout;
 };
 
-#endif // HEADER_H
+#endif // LOGO_H
