@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDialog>
+#include <cstdlib>
 
 int main(int argc, char **argv) {
   const QString NAME = "Aethervault";
@@ -19,6 +20,8 @@ int main(int argc, char **argv) {
     window->show();
   } else {
     qDebug() << "Login failed or cancelled.";
+    app.quit();
+    return 1;
   }
 
   return app.exec();
