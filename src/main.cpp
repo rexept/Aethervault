@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDialog>
-#include <cstdlib>
 
 int main(int argc, char **argv) {
   const QString NAME = "Aethervault";
