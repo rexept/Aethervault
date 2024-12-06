@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QStackedWidget>
 #include <QString>
 #include <QVBoxLayout>
 #include <QtSvg/QSvgWidget>
@@ -13,13 +14,16 @@
 Window::Window(QString dbUsername, QString dbPassword, QWidget *parent)
     : QWidget(parent) {
   // Init layouts and widgets
-  m_contactPage = new ContactPage(dbUsername, dbPassword, this);
-  m_logo = new Logo(this);
-  m_masterLayout = new QVBoxLayout(this);
+  m_contactPage = new ContactPage(dbUsername, dbPassword);
+  m_logo = new Logo();
+  m_stackedWidget = new QStackedWidget(this);
+  m_masterLayout = new QVBoxLayout();
 
   // Add layouts and widgets to master layout
+  m_stackedWidget->addWidget(m_contactPage);
+
   m_masterLayout->addLayout(m_logo->getLayout());
-  m_masterLayout->addWidget(m_contactPage);
+  m_masterLayout->addWidget(m_stackedWidget);
 
   setLayout(m_masterLayout);
 }
