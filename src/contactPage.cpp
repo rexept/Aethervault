@@ -26,15 +26,17 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword,
   m_layout = new QVBoxLayout(this);
 
   // Init input boxes
-  m_id = new QLineEdit(this);
-  m_website = new QLineEdit(this);
-  m_email = new QLineEdit(this);
-  m_password = new QLineEdit(this);
-  m_firstName = new QLineEdit(this);
-  m_lastName = new QLineEdit(this);
-  m_phoneNumber = new QLineEdit(this);
-  m_address1 = new QLineEdit(this);
-  m_address2 = new QLineEdit(this);
+  // clang-format off
+  m_id           = new QLineEdit(this);
+  m_website      = new QLineEdit(this);
+  m_email        = new QLineEdit(this);
+  m_password     = new QLineEdit(this);
+  m_firstName    = new QLineEdit(this);
+  m_lastName     = new QLineEdit(this);
+  m_phoneNumber  = new QLineEdit(this);
+  m_address1     = new QLineEdit(this);
+  m_address2     = new QLineEdit(this);
+  // clang-format on
 
   // Make m_id non-editable
   m_id->setReadOnly(true);
