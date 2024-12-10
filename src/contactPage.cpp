@@ -194,12 +194,9 @@ void ContactPage::viewContact(int contactId) {
     qDebug() << "No contact found with ID " << contactId
              << " or query failed: " << query.lastError().text();
   }
-  qDebug() << contactId;
   // re-connect button to QLineEdits
-  connect(saveButton, &QPushButton::clicked, this, [&, this]() {
-    qDebug() << contactId;
-    ContactPage::s_sendFieldsToDB(contactId);
-  });
+  connect(saveButton, &QPushButton::clicked, this,
+          [contactId, this]() { ContactPage::s_sendFieldsToDB(contactId); });
 }
 
 void ContactPage::deleteContact(int contactId) {
@@ -257,7 +254,6 @@ void ContactPage::s_sendFieldsToDB(int contactId) {
     query.addBindValue(m_phoneNumberField);
     query.addBindValue(m_address1Field);
     query.addBindValue(m_address2Field);
-    qDebug() << "Stupa: " << contactId;
     query.addBindValue(contactId);
   }
 
