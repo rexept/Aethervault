@@ -149,7 +149,7 @@ void ContactPage::m_setupInputFields() {
 }
 
 void ContactPage::m_setupSaveButton() {
-  QPushButton *saveButton = new QPushButton("Save", this);
+  saveButton = new QPushButton("Save", this);
 
   m_layout->addWidget(saveButton);
   m_layout->setAlignment(saveButton, Qt::AlignRight);
@@ -194,6 +194,12 @@ void ContactPage::viewContact(int contactId) {
     qDebug() << "No contact found with ID " << contactId
              << " or query failed: " << query.lastError().text();
   }
+  qDebug() << contactId;
+  // re-connect button to QLineEdits
+  connect(saveButton, &QPushButton::clicked, this, [&, this]() {
+    qDebug() << contactId;
+    ContactPage::s_sendFieldsToDB(contactId);
+  });
 }
 
 void ContactPage::deleteContact(int contactId) {
@@ -212,7 +218,7 @@ void ContactPage::deleteContact(int contactId) {
 
 // SLOTS
 
-void ContactPage::s_sendFieldsToDB() {
+void ContactPage::s_sendFieldsToDB(int contactId) {
   // When the button is clicked, retrieve the text from the QLineEdits
   QString m_websiteField = m_website->text();
   QString m_emailField = m_email->text();
@@ -225,17 +231,35 @@ void ContactPage::s_sendFieldsToDB() {
 
   // Currently only inserts - doesn't update
   QSqlQuery query(db);
-  query.prepare("INSERT INTO contacts (website, email, password, first_name, "
-                "last_name, phone_number, address_one, address_two) VALUES"
-                "(?, ?, ?, ?, ?, ?, ?, ?)");
-  query.addBindValue(m_websiteField);
-  query.addBindValue(m_emailField);
-  query.addBindValue(m_passwordField);
-  query.addBindValue(m_firstNameField);
-  query.addBindValue(m_lastNameField);
-  query.addBindValue(m_phoneNumberField);
-  query.addBindValue(m_address1Field);
-  query.addBindValue(m_address2Field);
+  if (contactId == 0) {
+    query.prepare("INSERT INTO contacts (website, email, password, first_name, "
+                  "last_name, phone_number, address_one, address_two) VALUES"
+                  "(?, ?, ?, ?, ?, ?, ?, ?)");
+    query.addBindValue(m_websiteField);
+    query.addBindValue(m_emailField);
+    query.addBindValue(m_passwordField);
+    query.addBindValue(m_firstNameField);
+    query.addBindValue(m_lastNameField);
+    query.addBindValue(m_phoneNumberField);
+    query.addBindValue(m_address1Field);
+    query.addBindValue(m_address2Field);
+  } else {
+    // clang-format off
+	query.prepare("UPDATE contacts SET website = ?, email = ?, password = ?, first_name = ?, "
+				  "last_name = ?, phone_number = ?, address_one = ?, address_two = ? "
+				  "WHERE id = ?");
+    // clang-format on
+    query.addBindValue(m_websiteField);
+    query.addBindValue(m_emailField);
+    query.addBindValue(m_passwordField);
+    query.addBindValue(m_firstNameField);
+    query.addBindValue(m_lastNameField);
+    query.addBindValue(m_phoneNumberField);
+    query.addBindValue(m_address1Field);
+    query.addBindValue(m_address2Field);
+    qDebug() << "Stupa: " << contactId;
+    query.addBindValue(contactId);
+  }
 
   if (!query.exec()) {
     qDebug() << "Error: Failed to insert contact to database"

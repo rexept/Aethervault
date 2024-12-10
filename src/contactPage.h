@@ -54,12 +54,14 @@ private:
   QString m_address1TextValue;
   QString m_address2TextValue;
 
+  QPushButton *saveButton;
+
   void m_setupInputFields();
   void m_setupSaveButton();
 
 public slots:
   // Is that a naming convention? - s_
-  void s_sendFieldsToDB();
+  void s_sendFieldsToDB(int contactId = 0);
   void s_togglePasswordVisibility(QAction *togglePasswordVisibilty);
 };
 #endif // CONTACTPAGE_H
