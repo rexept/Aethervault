@@ -226,7 +226,6 @@ void ContactPage::s_sendFieldsToDB(int contactId) {
   QString m_address1Field = m_address1->text();
   QString m_address2Field = m_address2->text();
 
-  // Currently only inserts - doesn't update
   QSqlQuery query(db);
   if (contactId == 0) {
     query.prepare("INSERT INTO contacts (website, email, password, first_name, "
