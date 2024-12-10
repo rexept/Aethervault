@@ -12,16 +12,16 @@ int main(int argc, char **argv) {
   app.setApplicationName(NAME);
   app.setApplicationVersion(VERSION);
 
-  Login login;
+  Login *login = new Login;
   // Make sure login button is clicked
-  if (login.exec()) {
-    Window *window = new Window(login.getUsername(), login.getPassword());
-    window->show();
+  if (login->exec()) {
+    Window window(login->getUsername(), login->getPassword());
+    window.show();
+    delete login;
+    return app.exec();
   } else {
     qDebug() << "Login failed or cancelled.";
     app.quit();
     return 1;
   }
-
-  return app.exec();
 }

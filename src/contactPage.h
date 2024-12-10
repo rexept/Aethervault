@@ -10,13 +10,18 @@ class QVBoxLayout;
 class QPushButton;
 
 class ContactPage : public QWidget {
+  // ADD THE OBJECT BACK! - vtable error tho
+  /* Q_OBJECT */
+
 public:
   explicit ContactPage(QString dbUsername, QString dbPassword,
                        QWidget *parent = 0);
-  ~ContactPage();
+  virtual ~ContactPage();
 
   QVBoxLayout *getLayout() const;
   void closeDatabase();
+
+  void openViewContactPage();
 
 private:
   QSqlDatabase db;
@@ -40,5 +45,10 @@ private:
 
   void setupInputFields();
   void setupSaveButton();
+
+public slots:
+  // Is that a naming convention? - s_
+  void s_sendFieldsToDB();
+  void s_togglePasswordVisibility(QAction *togglePasswordVisibilty);
 };
 #endif // CONTACTPAGE_H

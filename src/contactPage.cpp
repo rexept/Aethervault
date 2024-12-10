@@ -49,19 +49,7 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword,
 
   connect(togglePasswordVisibility, &QAction::triggered, this,
           [this, togglePasswordVisibility]() {
-            if (!passwordIsShown) {
-              m_password->setEchoMode(QLineEdit::Normal);
-              togglePasswordVisibility->setIcon(
-                  QIcon("../assets/eye-solid.png"));
-
-              passwordIsShown = true;
-            } else {
-              m_password->setEchoMode(QLineEdit::Password);
-              togglePasswordVisibility->setIcon(
-                  QIcon("../assets/eye-slash-solid.png"));
-
-              passwordIsShown = false;
-            }
+            s_togglePasswordVisibility(togglePasswordVisibility);
           });
 
   // Database - SQL
@@ -155,36 +143,58 @@ void ContactPage::setupSaveButton() {
   m_layout->setAlignment(saveButton, Qt::AlignRight);
 
   // Connect button to QLineEdits
-  connect(saveButton, &QPushButton::clicked, this, [&, this]() {
-    // When the button is clicked, retrieve the text from the QLineEdits
-    QString m_websiteField = m_website->text();
-    QString m_emailField = m_email->text();
-    QString m_passwordField = m_password->text();
-    QString m_firstNameField = m_firstName->text();
-    QString m_lastNameField = m_lastName->text();
-    QString m_phoneNumberField = m_phoneNumber->text();
-    QString m_address1Field = m_address1->text();
-    QString m_address2Field = m_address2->text();
+  connect(saveButton, &QPushButton::clicked, this,
+          &ContactPage::s_sendFieldsToDB);
+}
 
-    // Currently only inserts - doesn't update
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO contacts (website, email, password, first_name, "
-                  "last_name, phone_number, address_one, address_two) VALUES"
-                  "(?, ?, ?, ?, ?, ?, ?, ?)");
-    query.addBindValue(m_websiteField);
-    query.addBindValue(m_emailField);
-    query.addBindValue(m_passwordField);
-    query.addBindValue(m_firstNameField);
-    query.addBindValue(m_lastNameField);
-    query.addBindValue(m_phoneNumberField);
-    query.addBindValue(m_address1Field);
-    query.addBindValue(m_address2Field);
+void ContactPage::openViewContactPage() {}
 
-    if (!query.exec()) {
-      qDebug() << "Error: Failed to insert contact to database"
-               << query.lastError().text();
-      QMessageBox::warning(this, "Error!",
-                           "Error: Failed to insert contact to database");
-    }
-  });
+// SLOTS
+
+void ContactPage::s_sendFieldsToDB() {
+  // When the button is clicked, retrieve the text from the QLineEdits
+  QString m_websiteField = m_website->text();
+  QString m_emailField = m_email->text();
+  QString m_passwordField = m_password->text();
+  QString m_firstNameField = m_firstName->text();
+  QString m_lastNameField = m_lastName->text();
+  QString m_phoneNumberField = m_phoneNumber->text();
+  QString m_address1Field = m_address1->text();
+  QString m_address2Field = m_address2->text();
+
+  // Currently only inserts - doesn't update
+  QSqlQuery query(db);
+  query.prepare("INSERT INTO contacts (website, email, password, first_name, "
+                "last_name, phone_number, address_one, address_two) VALUES"
+                "(?, ?, ?, ?, ?, ?, ?, ?)");
+  query.addBindValue(m_websiteField);
+  query.addBindValue(m_emailField);
+  query.addBindValue(m_passwordField);
+  query.addBindValue(m_firstNameField);
+  query.addBindValue(m_lastNameField);
+  query.addBindValue(m_phoneNumberField);
+  query.addBindValue(m_address1Field);
+  query.addBindValue(m_address2Field);
+
+  if (!query.exec()) {
+    qDebug() << "Error: Failed to insert contact to database"
+             << query.lastError().text();
+    QMessageBox::warning(this, "Error!",
+                         "Error: Failed to insert contact to database");
+  }
+}
+
+void ContactPage::s_togglePasswordVisibility(
+    QAction *togglePasswordVisibility) {
+  if (!passwordIsShown) {
+    m_password->setEchoMode(QLineEdit::Normal);
+    togglePasswordVisibility->setIcon(QIcon("../assets/eye-solid.png"));
+
+    passwordIsShown = true;
+  } else {
+    m_password->setEchoMode(QLineEdit::Password);
+    togglePasswordVisibility->setIcon(QIcon("../assets/eye-slash-solid.png"));
+
+    passwordIsShown = false;
+  }
 }

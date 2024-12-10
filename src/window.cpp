@@ -14,10 +14,10 @@
 Window::Window(QString dbUsername, QString dbPassword, QWidget *parent)
     : QWidget(parent) {
   // Init layouts and widgets
+  m_masterLayout = new QVBoxLayout();
+  m_stackedWidget = new QStackedWidget(this);
   m_contactPage = new ContactPage(dbUsername, dbPassword);
   m_logo = new Logo();
-  m_stackedWidget = new QStackedWidget(this);
-  m_masterLayout = new QVBoxLayout();
 
   // Add layouts and widgets to master layout
   m_stackedWidget->addWidget(m_contactPage);
@@ -31,8 +31,7 @@ Window::Window(QString dbUsername, QString dbPassword, QWidget *parent)
 Window::~Window() {
   m_contactPage->closeDatabase();
   // Redundant? Does QT know to delete because of window.show()
-  delete m_contactPage;
-  delete m_logo;
   delete m_masterLayout;
+  delete m_stackedWidget;
   qDebug() << "Window destructed";
 }
