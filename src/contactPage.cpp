@@ -262,6 +262,8 @@ void ContactPage::s_sendFieldsToDB(int contactId) {
              << query.lastError().text();
     QMessageBox::warning(this, "Error!",
                          "Error: Failed to insert contact to database");
+  } else {
+    qDebug() << "Sent contact fields to db";
   }
 }
 
