@@ -25,7 +25,7 @@ public:
   void deleteContact(int contactId);
 
 private:
-  QSqlDatabase db;
+  QSqlDatabase m_db;
 
   QString m_configDir;
   QString m_dbName;
@@ -54,7 +54,7 @@ private:
   QString m_address1TextValue;
   QString m_address2TextValue;
 
-  QPushButton *saveButton;
+  QPushButton *m_saveButton;
 
   void m_setupInputFields();
   void m_setupSaveButton();

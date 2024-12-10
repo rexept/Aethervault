@@ -54,20 +54,20 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword,
           });
 
   // Database - SQL
-  db = QSqlDatabase::addDatabase("QSQLITE");
-  db.setDatabaseName(m_dbName);
-  db.setUserName(dbUsername);
-  db.setPassword(dbPassword);
+  m_db = QSqlDatabase::addDatabase("QSQLITE");
+  m_db.setDatabaseName(m_dbName);
+  m_db.setUserName(dbUsername);
+  m_db.setPassword(dbPassword);
 
-  if (!db.open()) {
-    qDebug() << "Error: Unable to open the database" << db.lastError().text();
+  if (!m_db.open()) {
+    qDebug() << "Error: Unable to open the database" << m_db.lastError().text();
     QMessageBox::warning(this, "Error!", "Error: Unable to open the database");
   } else {
     qDebug() << "Database Opened";
   }
 
   // Create contact table (if it doesn't exist)
-  QSqlQuery query(db);
+  QSqlQuery query(m_db);
   if (!query.exec("CREATE TABLE IF NOT EXISTS contacts ("
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                   "website TEXT, "
@@ -93,7 +93,7 @@ void ContactPage::closeDatabase() {
   // Do I also have to remove??
   // Risky although ok because it gets closed before QCoreApplication is deleted
   // See docs
-  this->db.close();
+  m_db.close();
   qDebug() << "Closed database";
 }
 
@@ -149,18 +149,18 @@ void ContactPage::m_setupInputFields() {
 }
 
 void ContactPage::m_setupSaveButton() {
-  saveButton = new QPushButton("Save", this);
+  m_saveButton = new QPushButton("Save", this);
 
-  m_layout->addWidget(saveButton);
-  m_layout->setAlignment(saveButton, Qt::AlignRight);
+  m_layout->addWidget(m_saveButton);
+  m_layout->setAlignment(m_saveButton, Qt::AlignRight);
 
   // Connect button to QLineEdits
-  connect(saveButton, &QPushButton::clicked, this,
+  connect(m_saveButton, &QPushButton::clicked, this,
           &ContactPage::s_sendFieldsToDB);
 }
 
 void ContactPage::viewContact(int contactId) {
-  QSqlQuery query(db);
+  QSqlQuery query(m_db);
   query.prepare("SELECT website, email, password, first_name, last_name, "
                 "phone_number, address_one, address_two "
                 "FROM contacts WHERE id = ?");
@@ -195,12 +195,12 @@ void ContactPage::viewContact(int contactId) {
              << " or query failed: " << query.lastError().text();
   }
   // re-connect button to QLineEdits
-  connect(saveButton, &QPushButton::clicked, this,
+  connect(m_saveButton, &QPushButton::clicked, this,
           [contactId, this]() { ContactPage::s_sendFieldsToDB(contactId); });
 }
 
 void ContactPage::deleteContact(int contactId) {
-  QSqlQuery query(db);
+  QSqlQuery query(m_db);
   query.prepare("DELETE FROM contacts WHERE id = ?");
 
   query.addBindValue(contactId);
@@ -226,7 +226,7 @@ void ContactPage::s_sendFieldsToDB(int contactId) {
   QString m_address1Field = m_address1->text();
   QString m_address2Field = m_address2->text();
 
-  QSqlQuery query(db);
+  QSqlQuery query(m_db);
   if (contactId == 0) {
     query.prepare("INSERT INTO contacts (website, email, password, first_name, "
                   "last_name, phone_number, address_one, address_two) VALUES"
