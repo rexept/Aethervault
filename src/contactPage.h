@@ -21,16 +21,16 @@ public:
   QVBoxLayout *getLayout() const;
   void closeDatabase();
 
-  void openViewContactPage();
+  void viewContact(int contactId);
 
 private:
   QSqlDatabase db;
 
-  QString configDir;
-  QString dbName;
+  QString m_configDir;
+  QString m_dbName;
 
   QVBoxLayout *m_layout;
-  bool passwordIsShown;
+  bool m_passwordIsShown;
 
   QLineEdit *m_id;
 
@@ -43,8 +43,18 @@ private:
   QLineEdit *m_address1;
   QLineEdit *m_address2;
 
-  void setupInputFields();
-  void setupSaveButton();
+  QString m_idTextValue;
+  QString m_websiteTextValue;
+  QString m_emailTextValue;
+  QString m_passwordTextValue;
+  QString m_firstNameTextValue;
+  QString m_lastNameTextValue;
+  QString m_phoneNumberTextValue;
+  QString m_address1TextValue;
+  QString m_address2TextValue;
+
+  void m_setupInputFields();
+  void m_setupSaveButton();
 
 public slots:
   // Is that a naming convention? - s_

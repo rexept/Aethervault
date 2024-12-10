@@ -10,17 +10,18 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword,
                          QWidget *parent)
     : QWidget(parent) {
   // Init
-  passwordIsShown = false;
+  m_passwordIsShown = false;
   // Database - SQL
-  configDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+  m_configDir =
+      QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 
-  qDebug() << "Config directory: " + configDir;
+  qDebug() << "Config directory: " + m_configDir;
 
   QDir dbDir;
-  dbDir.mkdir(configDir + "/aethervault");
-  dbName = configDir + "/aethervault/aether.db";
+  dbDir.mkdir(m_configDir + "/aethervault");
+  m_dbName = m_configDir + "/aethervault/aether.db";
 
-  qDebug() << "Database path: " + dbName;
+  qDebug() << "Database path: " + m_dbName;
 
   // Init layout
   m_layout = new QVBoxLayout(this);
@@ -54,7 +55,7 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword,
 
   // Database - SQL
   db = QSqlDatabase::addDatabase("QSQLITE");
-  db.setDatabaseName(dbName);
+  db.setDatabaseName(m_dbName);
   db.setUserName(dbUsername);
   db.setPassword(dbPassword);
 
@@ -84,8 +85,8 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword,
   } else {
     qDebug() << "Initiated contacts table";
   }
-  setupInputFields();
-  setupSaveButton();
+  m_setupInputFields();
+  m_setupSaveButton();
 }
 
 void ContactPage::closeDatabase() {
@@ -102,7 +103,7 @@ ContactPage::~ContactPage() { qDebug() << "ContactPage destructed"; }
 QVBoxLayout *ContactPage::getLayout() const { return this->m_layout; }
 
 /// Adds widgets to layout and sets their respective placeholders
-void ContactPage::setupInputFields() {
+void ContactPage::m_setupInputFields() {
   // Add widgets to layout
   m_layout->addWidget(m_id);
   m_layout->addWidget(m_website);
@@ -125,6 +126,17 @@ void ContactPage::setupInputFields() {
   const QString address1Placeholder = "Address 1";
   const QString address2Placeholder = "Address 2";
 
+  // Set defaults
+  m_idTextValue = "";
+  m_websiteTextValue = "";
+  m_emailTextValue = "";
+  m_passwordTextValue = "";
+  m_firstNameTextValue = "";
+  m_lastNameTextValue = "";
+  m_phoneNumberTextValue = "";
+  m_address1TextValue = "";
+  m_address2TextValue = "";
+
   m_id->setPlaceholderText(idPlaceholder);
   m_website->setPlaceholderText(websitePlaceholder);
   m_email->setPlaceholderText(emailPlaceholder);
@@ -136,7 +148,7 @@ void ContactPage::setupInputFields() {
   m_address2->setPlaceholderText(address2Placeholder);
 }
 
-void ContactPage::setupSaveButton() {
+void ContactPage::m_setupSaveButton() {
   QPushButton *saveButton = new QPushButton("Save", this);
 
   m_layout->addWidget(saveButton);
@@ -147,7 +159,42 @@ void ContactPage::setupSaveButton() {
           &ContactPage::s_sendFieldsToDB);
 }
 
-void ContactPage::openViewContactPage() {}
+void ContactPage::viewContact(int contactId) {
+  QSqlQuery query(db);
+  query.prepare("SELECT website, email, password, first_name, last_name, "
+                "phone_number, address_one, address_two "
+                "FROM contacts WHERE id = ?");
+
+  query.addBindValue(contactId);
+
+  // Execute the query
+  if (query.exec() && query.next()) {
+    m_websiteTextValue = query.value(0).toString();
+    m_emailTextValue = query.value(1).toString();
+    m_passwordTextValue = query.value(2).toString();
+    m_firstNameTextValue = query.value(3).toString();
+    m_lastNameTextValue = query.value(4).toString();
+    m_phoneNumberTextValue = query.value(5).toString();
+    m_address1TextValue = query.value(6).toString();
+    m_address2TextValue = query.value(7).toString();
+
+    m_idTextValue = QString::number(contactId);
+
+    qDebug() << "Viewing Contact ID: " << m_idTextValue;
+    m_id->setText(m_idTextValue);
+    m_website->setText(m_websiteTextValue);
+    m_email->setText(m_emailTextValue);
+    m_password->setText(m_passwordTextValue);
+    m_firstName->setText(m_firstNameTextValue);
+    m_lastName->setText(m_lastNameTextValue);
+    m_phoneNumber->setText(m_phoneNumberTextValue);
+    m_address1->setText(m_address1TextValue);
+    m_address2->setText(m_address2TextValue);
+  } else {
+    qDebug() << "No contact found with ID " << contactId
+             << " or query failed: " << query.lastError().text();
+  }
+}
 
 // SLOTS
 
@@ -186,15 +233,15 @@ void ContactPage::s_sendFieldsToDB() {
 
 void ContactPage::s_togglePasswordVisibility(
     QAction *togglePasswordVisibility) {
-  if (!passwordIsShown) {
+  if (!m_passwordIsShown) {
     m_password->setEchoMode(QLineEdit::Normal);
     togglePasswordVisibility->setIcon(QIcon("../assets/eye-solid.png"));
 
-    passwordIsShown = true;
+    m_passwordIsShown = true;
   } else {
     m_password->setEchoMode(QLineEdit::Password);
     togglePasswordVisibility->setIcon(QIcon("../assets/eye-slash-solid.png"));
 
-    passwordIsShown = false;
+    m_passwordIsShown = false;
   }
 }

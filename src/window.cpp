@@ -17,6 +17,7 @@ Window::Window(QString dbUsername, QString dbPassword, QWidget *parent)
   m_masterLayout = new QVBoxLayout();
   m_stackedWidget = new QStackedWidget(this);
   m_contactPage = new ContactPage(dbUsername, dbPassword);
+  m_contactPage->viewContact(1);
   m_logo = new Logo();
 
   // Add layouts and widgets to master layout
