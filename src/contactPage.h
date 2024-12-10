@@ -22,6 +22,7 @@ public:
   void closeDatabase();
 
   void viewContact(int contactId);
+  void deleteContact(int contactId);
 
 private:
   QSqlDatabase db;

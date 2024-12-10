@@ -196,6 +196,20 @@ void ContactPage::viewContact(int contactId) {
   }
 }
 
+void ContactPage::deleteContact(int contactId) {
+  QSqlQuery query(db);
+  query.prepare("DELETE FROM contacts WHERE id = ?");
+
+  query.addBindValue(contactId);
+
+  if (query.exec()) {
+    qDebug() << "Contact with ID " << contactId << " has been deleted.";
+  } else {
+    qDebug() << "Failed to delete contact with ID " << contactId << ": "
+             << query.lastError().text();
+  }
+}
+
 // SLOTS
 
 void ContactPage::s_sendFieldsToDB() {
