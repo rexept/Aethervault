@@ -4,21 +4,23 @@
 #include <QWidget>
 
 class ContactPage;
-class Header;
+class Logo;
 class QVBoxLayout;
 class QHBoxLayout;
 class QSvgWidget;
 class QString;
+class QStackedWidget;
 
 class Window : public QWidget {
 public:
-  explicit Window(QWidget *parent = 0);
+  explicit Window(QString dbUsername, QString dbPassword, QWidget *parent = 0);
+  ~Window();
 
 private:
   ContactPage *m_contactPage;
-  Header *m_header;
-  QSvgWidget *m_logo;
+  Logo *m_logo;
   QVBoxLayout *m_masterLayout;
+  QStackedWidget *m_stackedWidget;
   QString m_logoPath;
 };
 

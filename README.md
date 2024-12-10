@@ -5,8 +5,10 @@
 This is currently in the alpha phase and will be coming soon...\
 This currently only works Linux
 
-# Build Instructions (developement)
-Create a build directory and cd into it:
+# Build Instructions (development)
+Follow install instructions at [ libbcrypt ]( https://github.com/trusch/libbcrypt )
+
+After following above instructions create a build directory and cd into it:
 ```
 mkdir build
 cd build
@@ -24,7 +26,7 @@ Aethervault is a **Contact Manager**
 
 ---
 # To-Do
-- [ ] Save to SQL database
+- [x] Save to SQL database
 - [ ] Encryption
 - [ ] Make new layout
 - [ ] Add search bar

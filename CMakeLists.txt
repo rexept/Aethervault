@@ -19,5 +19,5 @@ target_link_libraries(Aethervault PRIVATE Qt5::Core Qt5::Widgets Qt5::Svg Qt5::S
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
-# Set g++ as the compiler
+# Set clangd++ as the compiler
 set(CMAKE_CXX_COMPILER "clang++")

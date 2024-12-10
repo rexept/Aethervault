@@ -2,6 +2,7 @@
 #define CONTACTPAGE_H
 
 #include <QWidget>
+#include <QtSql>
 
 class QLineEdit;
 class QLabel;
@@ -9,13 +10,30 @@ class QVBoxLayout;
 class QPushButton;
 
 class ContactPage : public QWidget {
-public:
-  explicit ContactPage(QWidget *parent = 0);
+  // ADD THE OBJECT BACK! - vtable error tho
+  /* Q_OBJECT */
 
-  QVBoxLayout *getLayout();
+public:
+  explicit ContactPage(QString dbUsername, QString dbPassword,
+                       QWidget *parent = 0);
+  virtual ~ContactPage();
+
+  QVBoxLayout *getLayout() const;
+  void closeDatabase();
+
+  void viewContact(int contactId);
+  void deleteContact(int contactId);
 
 private:
+  QSqlDatabase db;
+
+  QString m_configDir;
+  QString m_dbName;
+
   QVBoxLayout *m_layout;
+  bool m_passwordIsShown;
+
+  QLineEdit *m_id;
 
   QLineEdit *m_website;
   QLineEdit *m_email;
@@ -26,18 +44,24 @@ private:
   QLineEdit *m_address1;
   QLineEdit *m_address2;
 
-  QString m_websiteField;
-  QString m_emailField;
-  QString m_passwordField;
-  QString m_firstNameField;
-  QString m_lastNameField;
-  QString m_phoneNumberField;
-  QString m_address1Field;
-  QString m_address2Field;
+  QString m_idTextValue;
+  QString m_websiteTextValue;
+  QString m_emailTextValue;
+  QString m_passwordTextValue;
+  QString m_firstNameTextValue;
+  QString m_lastNameTextValue;
+  QString m_phoneNumberTextValue;
+  QString m_address1TextValue;
+  QString m_address2TextValue;
 
-  QPushButton *m_saveButton;
+  QPushButton *saveButton;
 
-  void setupInputFields();
-  void setupSaveButton();
+  void m_setupInputFields();
+  void m_setupSaveButton();
+
+public slots:
+  // Is that a naming convention? - s_
+  void s_sendFieldsToDB(int contactId = 0);
+  void s_togglePasswordVisibility(QAction *togglePasswordVisibilty);
 };
 #endif // CONTACTPAGE_H
