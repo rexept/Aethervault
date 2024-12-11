@@ -2,9 +2,7 @@
 
 ---
 
-Aethervault is a **CRM** \
-
-
+Aethervault is a **CRM**\
 This is currently in the alpha phase and will be coming soon...\
 This currently only works Linux
 
