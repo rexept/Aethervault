@@ -12,16 +12,16 @@ class QString;
 class QStackedWidget;
 
 class Window : public QWidget {
-public:
-  explicit Window(QString dbUsername, QString dbPassword, QWidget *parent = 0);
-  ~Window();
+  public:
+    explicit Window(QString dbUsername, QString dbPassword, QWidget* parent = 0);
+    ~Window();
 
-private:
-  ContactPage *m_contactPage;
-  Logo *m_logo;
-  QVBoxLayout *m_masterLayout;
-  QStackedWidget *m_stackedWidget;
-  QString m_logoPath;
+  private:
+    ContactPage*    m_contactPage;
+    Logo*           m_logo;
+    QVBoxLayout*    m_masterLayout;
+    QStackedWidget* m_stackedWidget;
+    QString         m_logoPath;
 };
 
 #endif // WINDOW_H

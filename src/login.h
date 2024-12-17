@@ -12,31 +12,31 @@ class QDialog;
 class Logo;
 
 class Login : public QWidget {
-public:
-  explicit Login(QWidget *parent = 0);
-  ~Login();
+  public:
+    explicit Login(QWidget* parent = 0);
+    ~Login();
 
-  int exec() const;
-  QString getUsername() const;
-  QString getPassword() const;
+    int     exec() const;
+    QString getUsername() const;
+    QString getPassword() const;
 
-private:
-  QVBoxLayout *m_authLayout;
+  private:
+    QVBoxLayout* m_authLayout;
 
-  QDialog *m_loginDialog;
-  QLabel *m_loginText;
+    QDialog*     m_loginDialog;
+    QLabel*      m_loginText;
 
-  QLabel *m_errorLabel;
+    QLabel*      m_errorLabel;
 
-  Logo *m_logo;
+    Logo*        m_logo;
 
-  QPushButton *m_loginButton;
+    QPushButton* m_loginButton;
 
-  QLineEdit *m_usernameField;
-  QLineEdit *m_passwordField;
+    QLineEdit*   m_usernameField;
+    QLineEdit*   m_passwordField;
 
-  QString m_usernameInput;
-  QString m_passwordInput;
+    QString      m_usernameInput;
+    QString      m_passwordInput;
 };
 
 #endif // LOGIN_H
