@@ -185,6 +185,7 @@ void ContactPage::viewContact(int contactId) {
         qDebug() << "No contact found with ID " << contactId << " or query failed: " << query.lastError().text();
     }
     // re-connect button to QLineEdits
+    disconnect(m_saveButton, &QPushButton::clicked, this, &ContactPage::s_sendFieldsToDB);
     connect(m_saveButton, &QPushButton::clicked, this, [contactId, this]() { ContactPage::s_sendFieldsToDB(contactId); });
 }
 
