@@ -9,8 +9,7 @@
 ContactPage::ContactPage(QString dbUsername, QString dbPassword, QWidget* parent) : QWidget(parent) {
     // Init
     m_passwordIsShown = false;
-    // Database - SQL
-    m_configDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    m_configDir       = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 
     qDebug() << "Config directory: " + m_configDir;
 
@@ -34,7 +33,7 @@ ContactPage::ContactPage(QString dbUsername, QString dbPassword, QWidget* parent
     m_address1    = new QLineEdit(this);
     m_address2    = new QLineEdit(this);
 
-    // Make m_id non-editable
+    // Make m_id non-editable to user
     m_id->setReadOnly(true);
 
     // Hide password
@@ -117,17 +116,6 @@ void ContactPage::m_setupInputFields() {
     const QString phoneNumberPlaceholder = "Phone Number";
     const QString address1Placeholder    = "Address 1";
     const QString address2Placeholder    = "Address 2";
-
-    // Set defaults
-    m_idTextValue          = "";
-    m_websiteTextValue     = "";
-    m_emailTextValue       = "";
-    m_passwordTextValue    = "";
-    m_firstNameTextValue   = "";
-    m_lastNameTextValue    = "";
-    m_phoneNumberTextValue = "";
-    m_address1TextValue    = "";
-    m_address2TextValue    = "";
 
     m_id->setPlaceholderText(idPlaceholder);
     m_website->setPlaceholderText(websitePlaceholder);
@@ -229,11 +217,9 @@ void ContactPage::s_sendFieldsToDB(int contactId) {
         query.addBindValue(m_address1Field);
         query.addBindValue(m_address2Field);
     } else {
-        // clang-format off
-	query.prepare("UPDATE contacts SET website = ?, email = ?, password = ?, first_name = ?, "
-				  "last_name = ?, phone_number = ?, address_one = ?, address_two = ? "
-				  "WHERE id = ?");
-        // clang-format on
+        query.prepare("UPDATE contacts SET website = ?, email = ?, password = ?, first_name = ?, "
+                      "last_name = ?, phone_number = ?, address_one = ?, address_two = ? "
+                      "WHERE id = ?");
         query.addBindValue(m_websiteField);
         query.addBindValue(m_emailField);
         query.addBindValue(m_passwordField);
