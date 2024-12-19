@@ -139,6 +139,17 @@ void ContactPage::m_setupSaveButton() {
 }
 
 void ContactPage::viewContact(int contactId) {
+    QPushButton* m_deleteContactButton = new QPushButton("Delete contact", this);
+
+    m_layout->addWidget(m_deleteContactButton);
+    m_layout->setAlignment(m_deleteContactButton, Qt::AlignRight);
+
+    connect(m_deleteContactButton, &QPushButton::clicked, this, [contactId, this]() { ContactPage::deleteContact(contactId); });
+
+    // re-connect button to QLineEdits
+    disconnect(m_saveButton, &QPushButton::clicked, this, &ContactPage::s_sendFieldsToDB);
+    connect(m_saveButton, &QPushButton::clicked, this, [contactId, this]() { ContactPage::s_sendFieldsToDB(contactId); });
+
     QSqlQuery query(m_db);
     query.prepare("SELECT website, email, password, first_name, last_name, "
                   "phone_number, address_one, address_two "
@@ -172,9 +183,6 @@ void ContactPage::viewContact(int contactId) {
     } else {
         qDebug() << "No contact found with ID " << contactId << " or query failed: " << query.lastError().text();
     }
-    // re-connect button to QLineEdits
-    disconnect(m_saveButton, &QPushButton::clicked, this, &ContactPage::s_sendFieldsToDB);
-    connect(m_saveButton, &QPushButton::clicked, this, [contactId, this]() { ContactPage::s_sendFieldsToDB(contactId); });
 }
 
 void ContactPage::deleteContact(int contactId) {
