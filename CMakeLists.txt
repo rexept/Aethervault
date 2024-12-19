@@ -5,7 +5,7 @@ file(GLOB SOURCES
 cmake_minimum_required(VERSION 3.5)
 
 # Set the project name and version
-project(Aethervault VERSION 1.0 LANGUAGES CXX)
+project(Aethervault VERSION 0.1.1 LANGUAGES CXX)
 
 # Find the Qt5 modules
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Svg Sql)
