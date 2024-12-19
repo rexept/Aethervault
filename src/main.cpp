@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv) {
     const QString NAME    = "Aethervault";
-    const QString VERSION = "0.1.1";
+    const QString VERSION = "0.2.0";
 
     QApplication  app(argc, argv);
     app.setApplicationName(NAME);

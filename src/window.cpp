@@ -9,7 +9,6 @@
 #include <QStackedWidget>
 #include <QString>
 #include <QVBoxLayout>
-#include <QtSvg/QSvgWidget>
 
 Window::Window(QString dbUsername, QString dbPassword, QWidget* parent) : QWidget(parent) {
     // Init layouts and widgets
