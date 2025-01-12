@@ -1,5 +1,4 @@
-#ifndef LOGIN_H
-#define LOGIN_H
+#pragma once
 
 #include <QWidget>
 
@@ -38,5 +37,3 @@ class Login : public QWidget {
     QString      m_usernameInput;
     QString      m_passwordInput;
 };
-
-#endif // LOGIN_H

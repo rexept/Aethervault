@@ -1,5 +1,4 @@
-#ifndef CONTACTPAGE_H
-#define CONTACTPAGE_H
+#pragma once
 
 #include <QWidget>
 #include <QtSql>
@@ -63,4 +62,3 @@ class ContactPage : public QWidget {
     void s_sendFieldsToDB(int contactId = 0);
     void s_togglePasswordVisibility(QAction* togglePasswordVisibilty);
 };
-#endif // CONTACTPAGE_H

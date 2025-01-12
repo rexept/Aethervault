@@ -1,5 +1,4 @@
-#ifndef LOGO_H
-#define LOGO_H
+#pragma once
 
 #include <QWidget>
 
@@ -18,5 +17,3 @@ class Logo : public QWidget {
     QString      m_logoPath;
     QHBoxLayout* m_headerLayout;
 };
-
-#endif // LOGO_H

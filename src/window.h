@@ -1,5 +1,4 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#pragma once
 
 #include <QWidget>
 
@@ -23,5 +22,3 @@ class Window : public QWidget {
     QStackedWidget* m_stackedWidget;
     QString         m_logoPath;
 };
-
-#endif // WINDOW_H
