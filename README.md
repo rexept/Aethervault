@@ -23,6 +23,7 @@ Now, just run `make` inside the build directory and run the `Aethervault` execut
 ---
 # To-Do
 - [x] Save to SQL database
+- [ ] Importing via various file types 
 - [ ] Encryption
 - [ ] Make new layout
 - [ ] Add search bar
