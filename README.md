@@ -19,7 +19,7 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 ```
 
 Now, just run `make` inside the build directory and run the `Aethervault` executable!
-
+bun
 ---
 # To-Do
 - [x] Save to SQL database
